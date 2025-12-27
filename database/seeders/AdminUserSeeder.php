@@ -1,0 +1,23 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\User;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
+
+class AdminUserSeeder extends Seeder
+{
+    public function run()
+    {
+        $user = User::create([
+            'name' => 'Super Admin',
+            'email' => 'admin@lenco.com',
+            'password' => Hash::make('password'),
+        ]);
+
+        $role = Role::firstOrCreate(['name' => 'super_admin']);
+        $user->assignRole($role);
+    }
+}
