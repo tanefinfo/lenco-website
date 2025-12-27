@@ -9,39 +9,26 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
 /**
- * @method \Laravel\Sanctum\NewAccessToken createToken(string $name, array $abilities = ['*'])
+ * @method \Laravel\Sanctum\NewAccessToken createToken(string $name, array $abilities = [])
+ * @method \Illuminate\Database\Eloquent\Relations\MorphMany tokens()
  * @method \Illuminate\Support\Collection getRoleNames()
- * @method \Illuminate\Support\Collection getAllPermissions()
+ * @method \Illuminate\Database\Eloquent\Collection getAllPermissions()
  */
 class User extends Authenticatable
 {
     use HasApiTokens, HasRoles, Notifiable, HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'name',
         'email',
         'password',
-        'is_active',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     */
     protected function casts(): array
     {
         return [
