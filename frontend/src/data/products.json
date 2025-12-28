@@ -1,0 +1,108 @@
+{
+  "products": [
+    {
+      "id": "cinema-lighting-kit",
+      "name": "Cinema Lighting Kit",
+      "description": "Portable LED three-point kit for on-location shoots.",
+      "fullDescription": "A travel-ready LED kit with key, fill, and back lights, diffusion, and stands. Perfect for music videos and interviews.",
+      "price": "Br 45,000",
+      "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&q=80",
+      "gallery": [
+        "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&q=80"
+      ],
+      "category": "Lighting",
+      "story": "Lencho’s go-to compact kit for fast setups in tight locations."
+    },
+    {
+      "id": "field-audio-recorder",
+      "name": "Field Audio Recorder",
+      "description": "4-channel recorder with XLR inputs for clean production sound.",
+      "fullDescription": "Capture dialogue and ambience with dual SD slots, 32-bit float recording, and timecode-ready workflow.",
+      "price": "Br 32,000",
+      "image": "https://images.unsplash.com/photo-1464375117522-1311d6a5b81f?w=800&q=80",
+      "gallery": [
+        "https://images.unsplash.com/photo-1464375117522-1311d6a5b81f?w=800&q=80"
+      ],
+      "category": "Audio",
+      "story": "Used across Lencho’s music videos to keep vocals and dialogue crisp even in noisy streets."
+    },
+    {
+      "id": "boom-mic-kit",
+      "name": "Boom Mic Kit",
+      "description": "Shotgun mic with shock mount, wind protection, and carbon boom.",
+      "fullDescription": "Lightweight carbon boom pole, supercardioid mic, blimp, and deadcat for exterior shoots.",
+      "price": "Br 18,500",
+      "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80",
+      "gallery": [
+        "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80"
+      ],
+      "category": "Audio",
+      "story": "Lencho’s standard kit for dialogue on set and behind-the-scenes coverage."
+    },
+    {
+      "id": "portable-led-panel",
+      "name": "Portable LED Panel",
+      "description": "Bi-color LED with battery plate for quick accent lighting.",
+      "fullDescription": "Dimmable, lightweight panel with softbox and grid for controlled highlights in music videos and interviews.",
+      "price": "Br 9,800",
+      "image": "https://images.unsplash.com/photo-1489515217757-5fd1be406fef?w=800&q=80",
+      "gallery": [
+        "https://images.unsplash.com/photo-1489515217757-5fd1be406fef?w=800&q=80"
+      ],
+      "category": "Lighting",
+      "story": "Great for eye lights and quick edge lighting when Lencho needs speed."
+    },
+    {
+      "id": "director-slate",
+      "name": "Director Slate",
+      "description": "Acrylic clapperboard with timecode strip.",
+      "fullDescription": "Durable slate with colored sticks and dry-erase surface. Helps sync audio and picture fast on multi-cam shoots.",
+      "price": "Br 3,200",
+      "image": "https://images.unsplash.com/photo-1451188502541-13943edb6acb?w=800&q=80",
+      "gallery": [
+        "https://images.unsplash.com/photo-1451188502541-13943edb6acb?w=800&q=80"
+      ],
+      "category": "Accessories",
+      "story": "Standard on Lencho’s sets to keep post-production organized."
+    },
+    {
+      "id": "lens-cleaning-pro",
+      "name": "Lens Cleaning Pro Kit",
+      "description": "Tools to keep cinema lenses spotless on set.",
+      "fullDescription": "Includes air blower, microfiber cloths, swabs, and solution in a rugged pouch.",
+      "price": "Br 1,500",
+      "image": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&q=80",
+      "gallery": [
+        "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&q=80"
+      ],
+      "category": "Accessories",
+      "story": "Keeps glass clean when moving fast between shots."
+    },
+    {
+      "id": "storyboard-notebook",
+      "name": "Storyboard Notebook",
+      "description": "Dot-grid notebook for shot planning and blocking notes.",
+      "fullDescription": "Thick paper, lay-flat binding, and shot template pages to sketch frames and camera moves.",
+      "price": "Br 950",
+      "image": "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=800&q=80",
+      "gallery": [
+        "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=800&q=80"
+      ],
+      "category": "Prints",
+      "story": "Lencho’s pocket notebook for pre-production walkthroughs."
+    },
+    {
+      "id": "studio-headphones",
+      "name": "Studio Headphones",
+      "description": "Closed-back monitoring for music and dialog.",
+      "fullDescription": "Flat response, comfortable pads, detachable cable, and foldable design for travel.",
+      "price": "Br 14,500",
+      "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&q=80",
+      "gallery": [
+        "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&q=80"
+      ],
+      "category": "Equipment",
+      "story": "Chosen for playback on Lencho’s music video sets."
+    }
+  ]
+}

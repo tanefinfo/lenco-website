@@ -1,0 +1,92 @@
+{
+  "projects": [
+    {
+      "id": "echoes-of-tomorrow",
+      "title": "Echoes of Tomorrow",
+      "category": "Films",
+      "description": "A gripping drama exploring generational trauma and redemption in modern Lagos.",
+      "fullDescription": "Echoes of Tomorrow is a powerful narrative that weaves through three generations of a Nigerian family, exploring how the sins and sacrifices of our ancestors echo through time. Shot over 45 days across Lagos and the rural landscapes of Ogun State, this film represents a new chapter in African storytelling.",
+      "image": "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=800&q=80",
+      "gallery": [
+        "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=800&q=80",
+        "https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=800&q=80",
+        "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&q=80"
+      ],
+      "credits": [
+        { "role": "Director", "name": "Abalata" },
+        { "role": "Producer", "name": "Sarah Zewdie" },
+        { "role": "Cinematographer", "name": "Dawit Negash" },
+        { "role": "Lead Actor", "name": "Kunle Remi" }
+      ],
+      "year": "2024"
+    },
+    {
+      "id": "midnight-frequency",
+      "title": "Midnight Frequency",
+      "category": "Music Videos",
+      "description": "Afrobeats meets visual poetry in this atmospheric music video.",
+      "fullDescription": "A visual journey through the streets of Lagos at night, capturing the pulse of the city's underground music scene. The video employs innovative lighting techniques and choreography to create a dreamlike exploration of rhythm and movement.",
+      "image": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80",
+      "gallery": [
+        "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80",
+        "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800&q=80"
+      ],
+      "credits": [
+        { "role": "Director", "name": "Abalata" },
+        { "role": "Artist", "name": "DJ Spinall" },
+        { "role": "Choreographer", "name": "Kafayat Shafau" }
+      ],
+      "year": "2024"
+    },
+    {
+      "id": "rise-heritage",
+      "title": "Rise: Heritage",
+      "category": "Commercials",
+      "description": "Brand campaign celebrating African heritage for a global fashion label.",
+      "fullDescription": "Rise: Heritage is a commercial campaign that bridges traditional African craftsmanship with contemporary fashion. Shot across multiple locations, the commercial tells the story of African fashion's influence on global style.",
+      "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+      "gallery": [
+        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+        "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800&q=80"
+      ],
+      "credits": [
+        { "role": "Director", "name": "Abalata" },
+        { "role": "Brand", "name": "Heritage Collective" },
+        { "role": "Stylist", "name": "Adama Paris" }
+      ],
+      "year": "2023"
+    },
+    {
+      "id": "silent-voices",
+      "title": "Silent Voices",
+      "category": "Films",
+      "description": "A documentary exploring the untold stories of African women in cinema.",
+      "fullDescription": "Silent Voices documents the journey of pioneering African women in the film industry, from the 1960s to today. Through intimate interviews and archival footage, the film reveals the struggles and triumphs of those who paved the way.",
+      "image": "https://images.unsplash.com/photo-1524712245354-2c4e5e7121c0?w=800&q=80",
+      "gallery": [
+        "https://images.unsplash.com/photo-1524712245354-2c4e5e7121c0?w=800&q=80"
+      ],
+      "credits": [
+        { "role": "Director", "name": "Abalata" },
+        { "role": "Producer", "name": "Funke Akindele" }
+      ],
+      "year": "2023"
+    },
+    {
+      "id": "electric-soul",
+      "title": "Electric Soul",
+      "category": "Music Videos",
+      "description": "A vibrant visual experience blending Afro-electronic sounds with bold imagery.",
+      "fullDescription": "Electric Soul pushes the boundaries of music video production with its innovative use of LED technology, projection mapping, and live performance capture.",
+      "image": "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800&q=80",
+      "gallery": [
+        "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800&q=80"
+      ],
+      "credits": [
+        { "role": "Director", "name": "Abalata" },
+        { "role": "Artist", "name": "Tems" }
+      ],
+      "year": "2024"
+    }
+  ]
+}

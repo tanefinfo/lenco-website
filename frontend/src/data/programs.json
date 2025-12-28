@@ -1,0 +1,130 @@
+{
+  "programs": [
+    {
+      "id": "filmmaking-masterclass",
+      "title": "Filmmaking Masterclass",
+      "description": "Comprehensive training in directing, cinematography, and storytelling for aspiring filmmakers.",
+      "fullDescription": "This intensive program covers every aspect of filmmaking from pre-production to post. Learn from industry professionals and work on real projects that will build your portfolio.",
+      "duration": "12 Weeks",
+      "level": "Intermediate",
+      "image": "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=800&q=80",
+      "curriculum": [
+        "Fundamentals of Visual Storytelling",
+        "Camera Operation & Cinematography",
+        "Directing Actors & Scenes",
+        "Editing & Post-Production",
+        "Sound Design & Music",
+        "Final Project Production"
+      ],
+      "outcomes": [
+        "Direct a short film from concept to completion",
+        "Build a professional portfolio",
+        "Network with industry professionals",
+        "Certificate of Completion"
+      ],
+      "price": "₦350,000"
+    },
+    {
+      "id": "music-production",
+      "title": "Music Production",
+      "description": "Learn to create, mix, and master professional-quality music in any genre.",
+      "fullDescription": "From Afrobeats to Amapiano, this program teaches you the technical and creative skills needed to produce chart-topping tracks. Work with professional studio equipment and software.",
+      "duration": "8 Weeks",
+      "level": "Beginner",
+      "image": "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&q=80",
+      "curriculum": [
+        "Music Theory Fundamentals",
+        "DAW Mastery (FL Studio/Ableton)",
+        "Beat Making & Sound Design",
+        "Mixing Techniques",
+        "Mastering for Distribution",
+        "Music Business Basics"
+      ],
+      "outcomes": [
+        "Produce 5 original tracks",
+        "Master industry-standard software",
+        "Understand music distribution",
+        "Studio internship opportunity"
+      ],
+      "price": "₦250,000"
+    },
+    {
+      "id": "screenwriting-intensive",
+      "title": "Screenwriting Intensive",
+      "description": "Master the art of storytelling for film and television with hands-on workshops.",
+      "fullDescription": "Learn to craft compelling narratives that resonate with African and global audiences. This program combines theory with practical writing exercises and industry feedback.",
+      "duration": "6 Weeks",
+      "level": "All Levels",
+      "image": "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=800&q=80",
+      "curriculum": [
+        "Story Structure & Development",
+        "Character Creation",
+        "Dialogue Writing",
+        "Genre Writing",
+        "Script Formatting",
+        "Pitching Your Project"
+      ],
+      "outcomes": [
+        "Complete a feature-length screenplay",
+        "Develop a TV pilot",
+        "Pitch to production companies",
+        "Join writers' network"
+      ],
+      "price": "₦180,000"
+    },
+    {
+      "id": "cinematography-fundamentals",
+      "title": "Cinematography Fundamentals",
+      "description": "Learn the visual language of cinema and master camera techniques.",
+      "fullDescription": "This hands-on program focuses on the art and science of cinematography. Work with professional cinema cameras and lighting equipment.",
+      "duration": "10 Weeks",
+      "level": "Intermediate",
+      "image": "https://images.unsplash.com/photo-1540655037529-dec987208707?w=800&q=80",
+      "curriculum": [
+        "Camera Systems & Operations",
+        "Lighting for Film",
+        "Color Theory & Grading",
+        "Movement & Composition",
+        "Location Cinematography",
+        "Final Project Shooting"
+      ],
+      "outcomes": [
+        "Master professional camera systems",
+        "Build a cinematography reel",
+        "Understand lighting setups",
+        "Industry certification"
+      ],
+      "price": "₦300,000"
+    }
+  ],
+  "mentors": [
+    {
+      "id": "1",
+      "name": "Abalata",
+      "role": "Founder & Creative Director",
+      "bio": "Award-winning filmmaker and music producer with over 15 years of experience in the African entertainment industry.",
+      "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80"
+    },
+    {
+      "id": "2",
+      "name": "Amara Obi",
+      "role": "Head of Film Studies",
+      "bio": "Former Nollywood director with international recognition for her groundbreaking documentary work.",
+      "image": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&q=80"
+    },
+    {
+      "id": "3",
+      "name": "Kofi Mensah",
+      "role": "Music Production Lead",
+      "bio": "Grammy-nominated producer who has worked with top African artists across multiple genres.",
+      "image": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80"
+    },
+    {
+      "id": "4",
+      "name": "Zainab Ahmed",
+      "role": "Screenwriting Instructor",
+      "bio": "Award-winning screenwriter whose work has been featured in major African film festivals.",
+      "image": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80"
+    }
+  ]
+}

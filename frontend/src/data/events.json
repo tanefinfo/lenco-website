@@ -1,0 +1,72 @@
+{
+  "events": [
+    {
+      "id": "filmmaker-summit-2025",
+      "title": "African Filmmaker Summit 2025",
+      "description": "A gathering of the continent's most innovative filmmakers for three days of workshops, screenings, and networking.",
+      "date": "March 15-17, 2025",
+      "time": "9:00 AM - 6:00 PM",
+      "location": "Lagos Continental Hotel, Lagos",
+      "image": "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800&q=80",
+      "type": "upcoming"
+    },
+    {
+      "id": "music-production-bootcamp",
+      "title": "Music Production Bootcamp",
+      "description": "Intensive weekend bootcamp covering advanced production techniques with industry professionals.",
+      "date": "February 8-9, 2025",
+      "time": "10:00 AM - 5:00 PM",
+      "location": "Abalata Studio, Lagos",
+      "image": "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&q=80",
+      "type": "upcoming"
+    },
+    {
+      "id": "premiere-echoes",
+      "title": "Echoes of Tomorrow - World Premiere",
+      "description": "Exclusive premiere screening followed by Q&A with the director and cast.",
+      "date": "January 25, 2025",
+      "time": "7:00 PM",
+      "location": "IMAX Cinemas, Lekki",
+      "image": "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=800&q=80",
+      "type": "upcoming"
+    },
+    {
+      "id": "academy-showcase-2024",
+      "title": "Academy Showcase 2024",
+      "description": "Annual showcase featuring the best work from Abalata Academy graduates.",
+      "date": "December 10, 2024",
+      "time": "4:00 PM - 9:00 PM",
+      "location": "Terra Kulture, Lagos",
+      "image": "https://images.unsplash.com/photo-1524712245354-2c4e5e7121c0?w=800&q=80",
+      "type": "past",
+      "gallery": [
+        "https://images.unsplash.com/photo-1524712245354-2c4e5e7121c0?w=800&q=80",
+        "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&q=80"
+      ]
+    },
+    {
+      "id": "masterclass-directing",
+      "title": "Masterclass: The Art of Directing",
+      "description": "An intimate masterclass on film direction with award-winning directors.",
+      "date": "November 20, 2024",
+      "time": "2:00 PM - 6:00 PM",
+      "location": "Abalata Academy, Lagos",
+      "image": "https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=800&q=80",
+      "type": "past"
+    },
+    {
+      "id": "afrobeats-night",
+      "title": "Afrobeats Production Night",
+      "description": "Live music production session and networking event for music producers.",
+      "date": "October 5, 2024",
+      "time": "6:00 PM - 11:00 PM",
+      "location": "Hard Rock Cafe, Lagos",
+      "image": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80",
+      "type": "past",
+      "gallery": [
+        "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80",
+        "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800&q=80"
+      ]
+    }
+  ]
+}
