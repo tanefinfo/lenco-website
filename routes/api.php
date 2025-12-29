@@ -11,6 +11,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Api\GalleryController;
 use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\FestivalController;
+use App\Http\Controllers\Api\ServiceController;
 
 Route::post('/login', [AuthController::class, 'login']);
 
@@ -95,3 +96,10 @@ Route::prefix('festivals')->group(function () {
     Route::delete('/{id}', [FestivalController::class, 'destroy']);
 });
 
+// routes/api.php
+
+Route::get('/services', [ServiceController::class, 'index']);
+Route::get('/services/{service}', [ServiceController::class, 'show']);
+Route::post('/services', [ServiceController::class, 'store']);
+Route::put('/services/{service}', [ServiceController::class, 'update']);
+Route::delete('/services/{service}', [ServiceController::class, 'destroy']);
