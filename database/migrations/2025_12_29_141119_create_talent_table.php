@@ -11,10 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('talent', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+        Schema::create('talents', function (Blueprint $table) {
+    $table->id();
+    $table->string('title_en');
+    $table->string('title_am')->nullable();
+    $table->string('title_or')->nullable();
+
+    $table->text('description_en');
+    $table->text('description_am')->nullable();
+    $table->text('description_or')->nullable();
+
+    $table->string('category')->nullable(); // Actor, Dancer, Crew, etc
+    $table->date('deadline')->nullable();
+    $table->string('cover_image')->nullable();
+    $table->timestamps();
+});
+
     }
 
     /**

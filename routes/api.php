@@ -13,6 +13,8 @@ use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\FestivalController;
 use App\Http\Controllers\Api\ServiceController;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\TalentController;
+use App\Http\Controllers\Api\TalentApplicationController;
 
 Route::post('/login', [AuthController::class, 'login']);
 
@@ -112,4 +114,19 @@ Route::prefix('products')->group(function () {
     Route::post('/', [ProductController::class, 'store']);
     Route::put('/{id}', [ProductController::class, 'update']);
     Route::delete('/{id}', [ProductController::class, 'destroy']);
+});
+
+Route::prefix('talents')->group(function () {
+    Route::get('/', [TalentController::class, 'index']);
+    Route::get('{id}', [TalentController::class, 'show']);
+    Route::post('/', [TalentController::class, 'store']);
+    Route::put('{id}', [TalentController::class, 'update']);
+    Route::delete('{id}', [TalentController::class, 'destroy']);
+
+    Route::post('{id}/apply', [TalentApplicationController::class, 'store']);
+});
+Route::prefix('admin')->group(function () {
+    Route::get('talent-applications', [TalentApplicationController::class, 'index']);
+    Route::get('talent-applications/{id}', [TalentApplicationController::class, 'show']);
+    Route::put('talent-applications/{id}/review', [TalentApplicationController::class, 'review']);
 });
