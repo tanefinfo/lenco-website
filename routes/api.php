@@ -4,6 +4,8 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AboutContentController;
+use App\Http\Controllers\ContentController;
 
 Route::post('/login', [AuthController::class, 'login']);
 
@@ -29,3 +31,21 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::middleware('auth:sanctum')->put('/roles/{role}', [RoleController::class, 'update']);
     Route::middleware('auth:sanctum')->get('/permissions', [RoleController::class, 'permissions']);
 });
+
+Route::prefix('about')->group(function () {
+    Route::get('/', [AboutContentController::class, 'show']);       // READ
+    Route::post('/', [AboutContentController::class, 'store']);     // CREATE
+    Route::put('{lang}', [AboutContentController::class, 'update']); // UPDATE
+    Route::delete('{lang}', [AboutContentController::class, 'destroy']); // DELETE
+    Route::post('/bulk', [AboutContentController::class, 'bulkStore']);
+
+});
+
+Route::prefix('contents')->group(function () {
+    Route::get('/', [ContentController::class, 'index']);
+    Route::get('{type}/{slug}', [ContentController::class, 'show']);
+    Route::post('/', [ContentController::class, 'store']);
+    Route::put('{id}', [ContentController::class, 'update']);
+    Route::delete('{id}', [ContentController::class, 'destroy']);
+});
+
