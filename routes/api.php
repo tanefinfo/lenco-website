@@ -10,6 +10,7 @@ use App\Http\Controllers\AwardController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Api\GalleryController;
 use App\Http\Controllers\Api\EventController;
+use App\Http\Controllers\Api\FestivalController;
 
 Route::post('/login', [AuthController::class, 'login']);
 
@@ -82,4 +83,15 @@ Route::get('/events/{id}', [EventController::class, 'show']);
 Route::post('/events', [EventController::class, 'store']);
 Route::put('/events/{id}', [EventController::class, 'update']);
 Route::delete('/events/{id}', [EventController::class, 'destroy']);
+
+
+
+
+Route::prefix('festivals')->group(function () {
+    Route::get('/', [FestivalController::class, 'index']);
+    Route::get('/{id}', [FestivalController::class, 'show']);
+    Route::post('/', [FestivalController::class, 'store']);
+    Route::put('/{id}', [FestivalController::class, 'update']);
+    Route::delete('/{id}', [FestivalController::class, 'destroy']);
+});
 
