@@ -1,0 +1,48 @@
+{
+  "awards": [
+    {
+      "id": "aw-amaas-2024",
+      "title": "Best Director",
+      "year": "2024",
+      "category": "Direction",
+      "placement": "Winner",
+      "issuer": "Africa Movie Academy Awards",
+      "project": "Echoes of Tomorrow",
+      "image": "https://images.unsplash.com/photo-1515162305281-9df01811f002?auto=format&fit=crop&w=1400&q=80",
+      "description": "Honored for leading an Ethiopia-first crew with bold visual language."
+    },
+    {
+      "id": "aw-ziiff-2023",
+      "title": "Jury Prize",
+      "year": "2023",
+      "category": "Feature Film",
+      "placement": "Jury Special Mention",
+      "issuer": "Zanzibar International Film Festival",
+      "project": "Midnight Frequency",
+      "image": "https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1400&q=80",
+      "description": "Celebrated for authentic East African production design and score."
+    },
+    {
+      "id": "aw-cineafrica-2023",
+      "title": "Cinematography",
+      "year": "2023",
+      "category": "Cinematography",
+      "placement": "Winner",
+      "issuer": "CinéAfrica Showcase",
+      "project": "Desert Chorus",
+      "image": "https://images.unsplash.com/photo-1440404653325-ab127d49abc1?auto=format&fit=crop&w=1400&q=80",
+      "description": "Awarded for dusk-to-night lighting design in the Sahel sequence."
+    },
+    {
+      "id": "aw-newvoices-2022",
+      "title": "New Voices",
+      "year": "2022",
+      "category": "Emerging Director",
+      "placement": "Shortlist",
+      "issuer": "New African Voices Lab",
+      "project": "River of Threads",
+      "image": "https://images.unsplash.com/photo-1515169067865-5387a8769aeb?auto=format&fit=crop&w=1400&q=80",
+      "description": "Recognized for collaborative directing and community-led casting."
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "galleries": [
+    {
+      "id": "gal-portraits-1",
+      "title": "Studio Portraits",
+      "category": "Portraits",
+      "cover": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "description": "Clean studio portraits with soft lighting."
+    },
+    {
+      "id": "gal-bts-1",
+      "title": "Behind the Scenes",
+      "category": "Behind the Scenes",
+      "cover": "https://images.unsplash.com/photo-1526178610551-1aaf1e1a1c9c?auto=format&fit=crop&w=1200&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1526178610551-1aaf1e1a1c9c?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "description": "Candid production moments from set."
+    },
+    {
+      "id": "gal-onset-1",
+      "title": "On Set Frames",
+      "category": "On Set",
+      "cover": "https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?auto=format&fit=crop&w=1200&q=80",
+      "images": [
+        "https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=1200&q=80"
+      ],
+      "description": "Single-frame highlight from a dramatic scene."
+    }
+  ]
+}

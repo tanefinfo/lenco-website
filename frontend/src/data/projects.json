@@ -1,92 +1,93 @@
 {
   "projects": [
     {
-      "id": "echoes-of-tomorrow",
-      "title": "Echoes of Tomorrow",
+      "id": "Abba-malkaa",
+      "title": "Abba Malkaa",
       "category": "Films",
-      "description": "A gripping drama exploring generational trauma and redemption in modern Lagos.",
-      "fullDescription": "Echoes of Tomorrow is a powerful narrative that weaves through three generations of a Nigerian family, exploring how the sins and sacrifices of our ancestors echo through time. Shot over 45 days across Lagos and the rural landscapes of Ogun State, this film represents a new chapter in African storytelling.",
-      "image": "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=800&q=80",
+      "description": "Abbaa Malkaa is a landmark 2025 Afaan Oromoo family drama film directed by Lencho Fikru that explores social stigma and cultural identity in 1970s Ethiopia",
+      "fullDescription": "Abbaa Malkaa is a groundbreaking 2025 Oromo-language film directed by Lencho Fikru, rooted in the story of Jimma Galataa, a blacksmith confronting societal marginalization under Ethiopia’s stratified social norms of the 1970s. It combines deep cultural themes with rich storytelling and strong performances by locally trained actors, many from the Abbaa Lataa Acting Academy.  The film’s historic premiere at the Ethiopian National Theatre signifies a major milestone for Afaan Oromoo cinema and its increasing visibility on the national stage. Abbaa Malkaa has been praised for its authentic portrayal of Oromo culture and its contribution to expanding the Ethiopian film landscape.",
+      "image": "/public/img/works/abba-malkaa/abba-malkaa1.png",
       "gallery": [
-        "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=800&q=80",
-        "https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=800&q=80",
-        "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&q=80"
+        "/public/img/works/abba-malkaa/abba-malkaa1.png",
+        "/public/img/works/abba-malkaa/abba-malkaa2.png",
+        "/public/img/works/abba-malkaa/abba-malkaa3.png"
       ],
       "credits": [
-        { "role": "Director", "name": "Abalata" },
-        { "role": "Producer", "name": "Sarah Zewdie" },
-        { "role": "Cinematographer", "name": "Dawit Negash" },
-        { "role": "Lead Actor", "name": "Kunle Remi" }
+        { "role": "Director", "name": "Lencho Fikru" },
+        { "role": "Producer", "name": "Gemechu Abraham" },
+        { "role": "Screenplay", "name": "Hafte Bekele" },
+        { "role": "Lead Actor", "name": "Qananii Sabbooqaa" }
       ],
-      "year": "2024"
+      "year": "2025"
     },
     {
-      "id": "midnight-frequency",
-      "title": "Midnight Frequency",
+      "id": "darammasi",
+      "title": "Darammasi",
       "category": "Music Videos",
-      "description": "Afrobeats meets visual poetry in this atmospheric music video.",
-      "fullDescription": "A visual journey through the streets of Lagos at night, capturing the pulse of the city's underground music scene. The video employs innovative lighting techniques and choreography to create a dreamlike exploration of rhythm and movement.",
-      "image": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80",
+      "description": "Darammasi” is a 2023 Oromo-language Ethiopian song performed by Helen Berhe, blending contemporary Ethiopian pop with Oromo musical expression and released through Hope Music Ethiopia’s platform",
+      "fullDescription": "Darammasi” is a popular 2023 single by Ethiopian singer Helen Berhe, released on YouTube by the record label Hope Music Ethiopia. The song entered Ethiopian music charts, reaching a Top 10 position and appearing multiple times in weekly and daily rankings. Its music video was officially published on 30 May 2023 and has accumulated hundreds of thousands of views across platforms. The release marked one of Berhe’s notable Afaan Oromoo songs, expanding her repertoire beyond Amharic hits.",
+      "image": "/public/img/works/darammasi/darammasi.jpg",
       "gallery": [
-        "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80",
-        "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800&q=80"
+        "/public/img/works/darammasi/darammasi.jpg",
+        "/public/img/works/darammasi/darammasi2.png"
       ],
       "credits": [
-        { "role": "Director", "name": "Abalata" },
-        { "role": "Artist", "name": "DJ Spinall" },
-        { "role": "Choreographer", "name": "Kafayat Shafau" }
-      ],
-      "year": "2024"
-    },
-    {
-      "id": "rise-heritage",
-      "title": "Rise: Heritage",
-      "category": "Commercials",
-      "description": "Brand campaign celebrating African heritage for a global fashion label.",
-      "fullDescription": "Rise: Heritage is a commercial campaign that bridges traditional African craftsmanship with contemporary fashion. Shot across multiple locations, the commercial tells the story of African fashion's influence on global style.",
-      "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
-      "gallery": [
-        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
-        "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800&q=80"
-      ],
-      "credits": [
-        { "role": "Director", "name": "Abalata" },
-        { "role": "Brand", "name": "Heritage Collective" },
-        { "role": "Stylist", "name": "Adama Paris" }
+        { "role": "Director", "name": "Lencho Fikru" },
+        { "role": "Artist", "name": "Helen Berhe" },
+        { "role": "Lyrics/Melody", "name": "Jireenya Shiferraw" }
       ],
       "year": "2023"
     },
     {
-      "id": "silent-voices",
-      "title": "Silent Voices",
-      "category": "Films",
-      "description": "A documentary exploring the untold stories of African women in cinema.",
-      "fullDescription": "Silent Voices documents the journey of pioneering African women in the film industry, from the 1960s to today. Through intimate interviews and archival footage, the film reveals the struggles and triumphs of those who paved the way.",
-      "image": "https://images.unsplash.com/photo-1524712245354-2c4e5e7121c0?w=800&q=80",
+      "id": "iyyoolee",
+      "title": "Iyyoolee",
+      "category": "Music Videos",
+      "description": "Iyyoolee” is a vibrant 2024 Oromo-language music single by Ethiopian artist Gutu Abera that blends traditional rhythms with contemporary pop elements, celebrated for its energetic music video and wide regional popularity.",
+      "fullDescription": "Iyyoolee” is a 2024 Oromo song performed by Gutu Abera, known for its lively beat and engaging visuals that highlight cultural dance and community themes. Musically, the song blends melodic vocals with rich instrumentation contributed by musicians such as Mira Thiruchelvam and others. Since its release, “Iyyoolee” has been featured across streaming platforms and enjoyed by audiences for its cultural resonance and energetic performance style.",
+      "image": "/public/img/works/iyyoolee/iyyoolee.jpg",
       "gallery": [
-        "https://images.unsplash.com/photo-1524712245354-2c4e5e7121c0?w=800&q=80"
+        "/public/img/works/iyyoolee/iyyoolee.jpg",
+        "/public/img/works/iyyoolee/iyyoolee2.png"
       ],
       "credits": [
-        { "role": "Director", "name": "Abalata" },
+        { "role": "Director", "name": "Lencho Fikru" },
+        { "role": "Artist", "name": "Gutu Abera" },
+        { "role": "Producer", "name": "Mira Thiruchelvam" }
+      ],
+      "year": "2024"
+    },
+    {
+      "id": "Afran",
+      "title": "Afran",
+      "category": "Films",
+      "description": "An affan oromoo sitcom series that humorously explores the daily lives and challenges of a modern Oromo family living in Addis Ababa, blending cultural traditions with contemporary urban experiences.",
+      "fullDescription": "'Afran' is a groundbreaking Afaan Oromoo sitcom series that delves into the humorous and heartfelt experiences of an Oromo family navigating life in Addis Ababa. The show skillfully combines traditional Oromo cultural elements with the realities of modern urban living, offering viewers relatable storylines filled with comedy and warmth. Through its engaging characters and witty dialogue, 'Afran' highlights themes of family, community, and identity, making it a beloved addition to Ethiopian television.",
+      "image": "/public/img/works/afran/afran.png",
+      "gallery": [
+        "/public/img/works/afran/afran.png"
+      ],
+      "credits": [
+        { "role": "Director", "name": "Lencho Fikru" },
+        { "role": "Writer", "name": "Tesfaye Tolessa" },
         { "role": "Producer", "name": "Funke Akindele" }
       ],
-      "year": "2023"
+      "year": "2024"
     },
     {
-      "id": "electric-soul",
-      "title": "Electric Soul",
+      "id": "Baala-Gizee",
+      "title": "Baala Gizee",
       "category": "Music Videos",
-      "description": "A vibrant visual experience blending Afro-electronic sounds with bold imagery.",
-      "fullDescription": "Electric Soul pushes the boundaries of music video production with its innovative use of LED technology, projection mapping, and live performance capture.",
-      "image": "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800&q=80",
+      "description": "Yosan Getahun - Baala Gizee - Ethiopian Oromo Music 2023",
+      "fullDescription": "Yosan Getahun - Baala Gizee - Ethiopian Oromo Music 2023 Yosan Getahun - Baala Gizee - Ethiopian Oromo Music 2023 Yosan Getahun - Baala Gizee - Ethiopian Oromo Music 2023",
+      "image": "/public/img/works/balaagize/baalagizee.jpg",
       "gallery": [
-        "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800&q=80"
+        "/public/img/works/balaagize/baalagizee2.png"
       ],
       "credits": [
-        { "role": "Director", "name": "Abalata" },
-        { "role": "Artist", "name": "Tems" }
+        { "role": "Director", "name": "Lencho Fikru" },
+        { "role": "Artist", "name": "Yosan Getahun" }
       ],
-      "year": "2024"
+      "year": "2023"
     }
   ]
 }

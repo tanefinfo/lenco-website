@@ -10,11 +10,14 @@ import type {
   VideoItem,
   Profile,
   Testimonial,
+  Gallery,
+  Festival,
+  Award,
 } from "@/types/content";
 import projectsData from "@/data/projects.json";
 import programsData from "@/data/programs.json";
 import productsData from "@/data/products.json";
-import storiesData from "@/data/stories.json";
+// stories removed, kept for backward compatibility only if present
 import eventsData from "@/data/events.json";
 import servicesData from "@/data/services.json";
 import videosData from "@/data/videos.json";
@@ -53,7 +56,7 @@ export async function getProduct(id: string): Promise<Product | undefined> {
 }
 
 export async function getStories(): Promise<Story[]> {
-  return storiesData.stories as Story[];
+  return [] as Story[];
 }
 
 export async function getStory(id: string): Promise<Story | undefined> {
@@ -83,12 +86,10 @@ export async function getServices(): Promise<{
 export async function getVideos(): Promise<{
   musicVideos: VideoItem[];
   movieTrailers: VideoItem[];
-  academyVideos: VideoItem[];
 }> {
   return {
     musicVideos: videosData.musicVideos as VideoItem[],
-    movieTrailers: videosData.movieTrailers as VideoItem[],
-    academyVideos: videosData.academyVideos as VideoItem[],
+    movieTrailers: videosData.movieTrailers as VideoItem[]
   };
 }
 
@@ -98,4 +99,21 @@ export async function getProfile(): Promise<Profile> {
 
 export async function getTestimonials(): Promise<Testimonial[]> {
   return testimonialsData as Testimonial[];
+}
+
+// Galleries, Festivals, Awards
+import galleriesData from "@/data/galleries.json";
+import festivalsData from "@/data/festivals.json";
+import awardsData from "@/data/awards.json";
+
+export async function getGalleries(): Promise<Gallery[]> {
+  return galleriesData.galleries as Gallery[];
+}
+
+export async function getFestivals(): Promise<Festival[]> {
+  return festivalsData.festivals as Festival[];
+}
+
+export async function getAwards(): Promise<Award[]> {
+  return awardsData.awards as Award[];
 }

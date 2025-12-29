@@ -21,7 +21,7 @@ export default function Contact() {
     <Layout>
       <HeroSection
         title="Contact Lencho Fikiru"
-        subtitle="Have a project, collaboration idea, or academy question? Reach out directly to Lencho."
+        subtitle="Have a project, collaboration idea, or festival/awards inquiry? Reach out directly to Lencho."
       />
 
       <section className="section-padding">

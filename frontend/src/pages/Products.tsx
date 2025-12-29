@@ -10,7 +10,7 @@ const categories = [
   "Equipment",
   "Lighting",
   "Audio",
-  "Accessories",
+  "Apparel",
   "Prints",
 ];
 

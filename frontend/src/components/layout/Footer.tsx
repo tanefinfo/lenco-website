@@ -6,12 +6,13 @@ import { Button } from "@/components/ui/button";
 const footerLinks = {
   platform: [
     { name: "Works", path: "/works" },
-    { name: "Academy", path: "/academy" },
+    { name: "Galleries", path: "/galleries" },
     { name: "Products", path: "/products" },
     { name: "Studio", path: "/studio" },
   ],
   resources: [
-    { name: "Stories", path: "/stories" },
+    { name: "Festivals", path: "/festivals" },
+    { name: "Awards", path: "/awards" },
     { name: "Events", path: "/events" },
     { name: "About", path: "/about" },
     { name: "Contact", path: "/contact" },
@@ -46,8 +47,9 @@ export function Footer() {
               LenchoFikiru
             </Link>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              Director, filmmaker, and creative leader crafting Oromo music
-              videos and films with cultural respect and cinematic polish.
+              Director, filmmaker, and creative leader crafting Ethiopia-first
+              stories — across Oromo music videos and films — with cultural
+              respect and cinematic polish.
             </p>
             <div className="flex gap-4">
               {socialLinks.map((social) => (
@@ -101,7 +103,7 @@ export function Footer() {
           <div>
             <h4 className="text-foreground font-semibold mb-6">Stay Updated</h4>
             <p className="text-muted-foreground text-sm mb-4">
-              Subscribe for updates on new projects, academy programs, and
+              Subscribe for updates on new projects, festivals, awards, and
               events.
             </p>
             <form className="flex gap-2">
