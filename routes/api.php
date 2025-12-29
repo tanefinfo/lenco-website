@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\AboutContentController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\AwardController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\Api\GalleryController;
 
 Route::post('/login', [AuthController::class, 'login']);
 
@@ -68,5 +69,10 @@ Route::prefix('contact')->group(function () {
     Route::delete('/{id}', [ContactController::class, 'destroy']);
 });
 
+Route::get('/galleries', [GalleryController::class, 'index']);
+Route::get('/galleries/{id}', [GalleryController::class, 'show']);
+Route::post('/galleries', [GalleryController::class, 'store']);
+Route::put('/galleries/{id}', [GalleryController::class, 'update']);
+Route::delete('/galleries/{id}', [GalleryController::class, 'destroy']);
 
 
