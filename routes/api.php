@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AboutContentController;
 use App\Http\Controllers\ContentController;
+use App\Http\Controllers\AwardController;
 
 Route::post('/login', [AuthController::class, 'login']);
 
@@ -48,4 +49,13 @@ Route::prefix('contents')->group(function () {
     Route::put('{id}', [ContentController::class, 'update']);
     Route::delete('{id}', [ContentController::class, 'destroy']);
 });
+
+Route::prefix('awards')->group(function () {
+    Route::get('/', [AwardController::class, 'index']);
+    Route::get('/{id}', [AwardController::class, 'show']);
+    Route::post('/', [AwardController::class, 'store']);
+    Route::put('/{id}', [AwardController::class, 'update']);
+    Route::delete('/{id}', [AwardController::class, 'destroy']);
+});
+
 
