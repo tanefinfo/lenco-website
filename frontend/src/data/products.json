@@ -1,108 +1,114 @@
 {
   "products": [
     {
-      "id": "cinema-lighting-kit",
-      "name": "Cinema Lighting Kit",
-      "description": "Portable LED three-point kit for on-location shoots.",
-      "fullDescription": "A travel-ready LED kit with key, fill, and back lights, diffusion, and stands. Perfect for music videos and interviews.",
-      "price": "Br 45,000",
-      "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&q=80",
-      "gallery": [
-        "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&q=80"
-      ],
-      "category": "Lighting",
-      "story": "Lencho’s go-to compact kit for fast setups in tight locations."
+      "id": "studio-camera",
+      "name": "Studio Camera",
+      "description": "Robust studio camera body for controlled sets and multi-cam shoots.",
+      "fullDescription": "Professional studio camera with high dynamic range, clean HDMI/SDI out, and reliable power options. Derived from 'camera1.jpg'.",
+      "price": "Br 120,000",
+      "image": "/img/products/camera1.jpg",
+      "gallery": ["/img/products/camera1.jpg"],
+      "category": "Equipment",
+      "story": "Rock-solid on tripods, jibs, and studio builds."
     },
     {
-      "id": "field-audio-recorder",
-      "name": "Field Audio Recorder",
-      "description": "4-channel recorder with XLR inputs for clean production sound.",
-      "fullDescription": "Capture dialogue and ambience with dual SD slots, 32-bit float recording, and timecode-ready workflow.",
-      "price": "Br 32,000",
-      "image": "https://images.unsplash.com/photo-1464375117522-1311d6a5b81f?w=800&q=80",
-      "gallery": [
-        "https://images.unsplash.com/photo-1464375117522-1311d6a5b81f?w=800&q=80"
-      ],
-      "category": "Audio",
-      "story": "Used across Lencho’s music videos to keep vocals and dialogue crisp even in noisy streets."
+      "id": "cinema-camera",
+      "name": "Cinema Camera",
+      "description": "Compact cinema body for handheld and gimbal work with cinematic color.",
+      "fullDescription": "Lightweight 4K/6K capture, robust codecs, and fast autofocus for run-and-gun coverage. Derived from 'camera2.jpg'.",
+      "price": "Br 95,000",
+      "image": "/img/products/camera2.jpg",
+      "gallery": ["/img/products/camera2.jpg"],
+      "category": "Equipment",
+      "story": "Ideal as A/B cam on music videos and docs."
     },
     {
-      "id": "boom-mic-kit",
-      "name": "Boom Mic Kit",
-      "description": "Shotgun mic with shock mount, wind protection, and carbon boom.",
-      "fullDescription": "Lightweight carbon boom pole, supercardioid mic, blimp, and deadcat for exterior shoots.",
-      "price": "Br 18,500",
-      "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80",
-      "gallery": [
-        "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80"
-      ],
-      "category": "Audio",
-      "story": "Lencho’s standard kit for dialogue on set and behind-the-scenes coverage."
+      "id": "hero-costume",
+      "name": "Hero Costume",
+      "description": "Signature wardrobe piece tailored for lead characters and key scenes.",
+      "fullDescription": "Premium materials, fitted cuts, and continuity-ready accessories. Named from 'costume1.jpg'.",
+      "price": "Br 8,500",
+      "image": "/img/products/costume1.jpg",
+      "gallery": ["/img/products/costume1.jpg"],
+      "category": "Apparel",
+      "story": "Anchors the visual identity of the protagonist."
     },
     {
-      "id": "portable-led-panel",
-      "name": "Portable LED Panel",
-      "description": "Bi-color LED with battery plate for quick accent lighting.",
-      "fullDescription": "Dimmable, lightweight panel with softbox and grid for controlled highlights in music videos and interviews.",
-      "price": "Br 9,800",
-      "image": "https://images.unsplash.com/photo-1489515217757-5fd1be406fef?w=800&q=80",
-      "gallery": [
-        "https://images.unsplash.com/photo-1489515217757-5fd1be406fef?w=800&q=80"
-      ],
-      "category": "Lighting",
-      "story": "Great for eye lights and quick edge lighting when Lencho needs speed."
+      "id": "period-costume",
+      "name": "Period Costume",
+      "description": "Wardrobe set styled for historical and period scenes.",
+      "fullDescription": "Textured fabrics, era-accurate trims, and layered silhouettes for authenticity. From 'costume2.jpg'.",
+      "price": "Br 7,800",
+      "image": "/img/products/costume2.jpg",
+      "gallery": ["/img/products/costume2.jpg"],
+      "category": "Apparel",
+      "story": "Supports world-building with grounded visual detail."
     },
     {
-      "id": "director-slate",
-      "name": "Director Slate",
-      "description": "Acrylic clapperboard with timecode strip.",
-      "fullDescription": "Durable slate with colored sticks and dry-erase surface. Helps sync audio and picture fast on multi-cam shoots.",
-      "price": "Br 3,200",
-      "image": "https://images.unsplash.com/photo-1451188502541-13943edb6acb?w=800&q=80",
-      "gallery": [
-        "https://images.unsplash.com/photo-1451188502541-13943edb6acb?w=800&q=80"
-      ],
-      "category": "Accessories",
-      "story": "Standard on Lencho’s sets to keep post-production organized."
-    },
-    {
-      "id": "lens-cleaning-pro",
-      "name": "Lens Cleaning Pro Kit",
-      "description": "Tools to keep cinema lenses spotless on set.",
-      "fullDescription": "Includes air blower, microfiber cloths, swabs, and solution in a rugged pouch.",
-      "price": "Br 1,500",
-      "image": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&q=80",
-      "gallery": [
-        "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&q=80"
-      ],
-      "category": "Accessories",
-      "story": "Keeps glass clean when moving fast between shots."
-    },
-    {
-      "id": "storyboard-notebook",
-      "name": "Storyboard Notebook",
-      "description": "Dot-grid notebook for shot planning and blocking notes.",
-      "fullDescription": "Thick paper, lay-flat binding, and shot template pages to sketch frames and camera moves.",
-      "price": "Br 950",
-      "image": "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=800&q=80",
-      "gallery": [
-        "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=800&q=80"
-      ],
-      "category": "Prints",
-      "story": "Lencho’s pocket notebook for pre-production walkthroughs."
+      "id": "green-screen-kit",
+      "name": "Portable Green Screen Kit",
+      "description": "Foldable backdrop for clean keying on set and in studio.",
+      "fullDescription": "Wrinkle-resistant fabric with stand kit, travel bag, and quick setup clamps. From 'greenscreen.jpg'.",
+      "price": "Br 6,500",
+      "image": "/img/products/greenscreen.jpg",
+      "gallery": ["/img/products/greenscreen.jpg"],
+      "category": "Equipment",
+      "story": "Fast, reliable chroma key for VFX inserts."
     },
     {
       "id": "studio-headphones",
-      "name": "Studio Headphones",
-      "description": "Closed-back monitoring for music and dialog.",
-      "fullDescription": "Flat response, comfortable pads, detachable cable, and foldable design for travel.",
-      "price": "Br 14,500",
-      "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&q=80",
-      "gallery": [
-        "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&q=80"
-      ],
-      "category": "Equipment",
-      "story": "Chosen for playback on Lencho’s music video sets."
+      "name": "Studio Monitoring Headphones",
+      "description": "Closed-back headphones tuned for dialog and music playback.",
+      "fullDescription": "Flat response, cushioned pads, and detachable cable for long sessions. Based on 'headphones.jpg'.",
+      "price": "Br 16,800",
+      "image": "/img/products/headphones.jpg",
+      "gallery": ["/img/products/headphones.jpg"],
+      "category": "Audio",
+      "story": "Trusted on sets and in edit bays across projects."
+    },
+    {
+      "id": "rgb-led-panel",
+      "name": "RGB LED Panel",
+      "description": "Bi-color/RGB panel for quick accents and wash lighting.",
+      "fullDescription": "Dimmable panel with gel emulations, battery plate, and softbox accessory. Named from 'led.jpg'.",
+      "price": "Br 11,200",
+      "image": "/img/products/led.jpg",
+      "gallery": ["/img/products/led.jpg"],
+      "category": "Lighting",
+      "story": "Perfect for eye lights and stylized color scenes."
+    },
+    {
+      "id": "compact-location-light",
+      "name": "Compact Location Light",
+      "description": "Portable fixture for edge highlights and quick setups.",
+      "fullDescription": "Sturdy build, dimmable output, and barn doors for control. Based on 'light1.jpg'.",
+      "price": "Br 9,300",
+      "image": "/img/products/light1.jpg",
+      "gallery": ["/img/products/light1.jpg"],
+      "category": "Lighting",
+      "story": "A go-to for fast exterior and interior accents."
+    },
+    {
+      "id": "shotgun-microphone",
+      "name": "Shotgun Microphone",
+      "description": "Supercardioid shotgun mic for precise dialog capture.",
+      "fullDescription": "High sensitivity capsule, shock mount, and wind protection for location work. From 'mic.png'.",
+      "price": "Br 12,400",
+      "image": "/img/products/mic.png",
+      "gallery": ["/img/products/mic.png"],
+      "category": "Audio",
+      "story": "Standard for boom ops on narrative sets."
+    },
+    {
+      "id": "broadcast-dynamic-mic",
+      "name": "Broadcast Dynamic Microphone",
+      "description": "Dynamic mic ideal for voiceover, podcast, and live hosting.",
+      "fullDescription": "Tight polar pattern, plosive protection, and consistent tone for studio and stage. Derived from 'mic2.jpg'.",
+      "price": "Br 9,900",
+      "image": "/img/products/mic2.jpg",
+      "gallery": ["/img/products/mic2.jpg"],
+      "category": "Audio",
+      "story": "Reliable vocal capture across interviews and VO."
     }
   ]
 }

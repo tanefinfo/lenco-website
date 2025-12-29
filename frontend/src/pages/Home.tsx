@@ -9,7 +9,18 @@ import {
 import { Testimonials } from "@/components/shared/Testimonials";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { ArrowRight, Play, Camera } from "lucide-react";
+import {
+  ArrowRight,
+  Play,
+  Film,
+  GraduationCap,
+  ShoppingBag,
+  Music,
+  Headphones,
+  Disc3,
+  Clapperboard,
+  Camera,
+} from "lucide-react";
 import { useProducts, usePrograms, useProjects } from "@/hooks/useContent";
 
 export default function Home() {
@@ -169,9 +180,9 @@ export default function Home() {
             className="mt-6 text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-in-up"
             style={{ animationDelay: "0.2s" }}
           >
-            Lencho Fikiru crafts cinematic stories across Oromo music videos and
-            films—leading crews with precision, cultural respect, and an
-            international aesthetic.
+            Lencho Fikiru crafts cinematic stories rooted in Ethiopia—across
+            Oromo music videos and films—leading crews with precision, cultural
+            respect, and an international aesthetic.
           </p>
 
           <div
@@ -246,34 +257,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Academy Preview */}
-      <section className="section-padding">
-        <div className="container-custom">
-          <SectionHeader
-            title="Abba Lata Acting Academy"
-            subtitle="Training performers and creators with practical, industry-focused mentorship"
-          />
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {loadingPrograms && (
-              <p className="text-muted-foreground">Loading programs...</p>
-            )}
-            {programsError && (
-              <p className="text-destructive">Unable to load programs.</p>
-            )}
-            {programData?.map((program) => (
-              <ProgramCard key={program.id} {...program} />
-            ))}
-          </div>
-          <div className="mt-12 text-center">
-            <Button asChild className="gap-2">
-              <Link to="/academy">
-                Explore Programs
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
+      {/* Academy section removed */}
 
       {/* Products Preview */}
       <section className="section-padding bg-card">

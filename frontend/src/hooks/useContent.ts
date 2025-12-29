@@ -12,9 +12,10 @@ import {
   getServices,
   getVideos,
   getProfile,
-  getStories,
-  getStory,
   getTestimonials,
+  getGalleries,
+  getFestivals,
+  getAwards,
 } from "@/services/api";
 import type {
   Event,
@@ -23,11 +24,13 @@ import type {
   Program,
   Project,
   Service,
-  Story,
   WorkflowStep,
   VideoItem,
   Profile,
   Testimonial,
+  Gallery,
+  Festival,
+  Award,
 } from "@/types/content";
 
 const defaultOptions = { staleTime: 5 * 60 * 1000 } as const;
@@ -99,22 +102,7 @@ export function useProduct(id?: string) {
   });
 }
 
-export function useStories() {
-  return useQuery<Story[]>({
-    queryKey: ["stories"],
-    queryFn: getStories,
-    ...defaultOptions,
-  });
-}
-
-export function useStory(id?: string) {
-  return useQuery<Story | undefined>({
-    queryKey: ["story", id],
-    queryFn: () => getStory(id as string),
-    enabled: Boolean(id),
-    ...defaultOptions,
-  });
-}
+// stories removed
 
 export function useEvents() {
   return useQuery<Event[]>({
@@ -157,6 +145,30 @@ export function useTestimonials() {
   return useQuery<Testimonial[]>({
     queryKey: ["testimonials"],
     queryFn: getTestimonials,
+    ...defaultOptions,
+  });
+}
+
+export function useGalleries() {
+  return useQuery<Gallery[]>({
+    queryKey: ["galleries"],
+    queryFn: getGalleries,
+    ...defaultOptions,
+  });
+}
+
+export function useFestivals() {
+  return useQuery<Festival[]>({
+    queryKey: ["festivals"],
+    queryFn: getFestivals,
+    ...defaultOptions,
+  });
+}
+
+export function useAwards() {
+  return useQuery<Award[]>({
+    queryKey: ["awards"],
+    queryFn: getAwards,
     ...defaultOptions,
   });
 }

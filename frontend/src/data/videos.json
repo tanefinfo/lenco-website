@@ -1,68 +1,61 @@
 {
   "musicVideos": [
     {
-      "id": "l482T0yNkeo",
-      "title": "Oromo Anthem",
-      "description": "Emotive performance-driven video highlighting Oromo culture.",
+      "id": "-jGSKLtDEC8",
+      "title": "Iyyoolee",
+      "description": "Gutu Abera - Iyyoolee - New Ethiopia Oromo Music 2024",
       "embedUrl": "https://www.youtube.com/embed/-jGSKLtDEC8"
     },
     {
-      "id": "Zi_XLOBDo_Y",
-      "title": "Night Drive",
-      "description": "Moody neon visuals for a late-night Afrobeats track.",
+      "id": "mmTj8XmpPjI",
+      "title": "Maaf Diddaa?",
+      "description": "Maaf Diddaa? ( ነፃነት ሱልጣን)Ethiopian oromo Music Video",
       "embedUrl": "https://www.youtube.com/embed/mmTj8XmpPjI"
     },
     {
-      "id": "fRh_vgS2dFE",
-      "title": "City Lights",
-      "description": "High-energy choreography with fast lens moves.",
-      "embedUrl": "https://www.youtube.com/embed/fRh_vgS2dFE"
-    }
-  ],
-  "academyVideos": [
-    {
-      "id": "dQw4w9WgXcQ",
-      "title": "Academy Session: Acting Basics",
-      "description": "On-camera fundamentals with blocking drills.",
-      "embedUrl": "https://www.youtube.com/embed/jlp5Nbxg-vM"
+      "id": "ShPMgvYBD0o",
+      "title": "Baala Gizee",
+      "description": "Yosan Getahun - Baala Gizee - Ethiopian Oromo Music 2023",
+      "embedUrl": "https://www.youtube.com/embed/ShPMgvYBD0o"
     },
     {
-      "id": "Zi_XLOBDo_Y",
-      "title": "Workshop: Blocking for Camera",
-      "description": "Staging movement for music videos and scenes.",
-      "embedUrl": "https://www.youtube.com/embed/ZQVqbwSDBMc"
+      "id": "fxBX2nxgmyQ",
+      "title": "Waliif Hubachaa",
+      "description": "TG Kasahun - Waliif Hubachaa- New Ethiopian Oromo Music 2023",
+      "embedUrl": "https://www.youtube.com/embed/fxBX2nxgmyQ"
     },
     {
-      "id": "l482T0yNkeo",
-      "title": "Performance Coaching Lab",
-      "description": "Voice and gesture coaching for close-ups.",
-      "embedUrl": "https://www.youtube.com/embed/RGrPKKg0Rts"
+      "id": "V0DXodXb9Zc",
+      "title": "Shillimii",
+      "description": "Daangaa H Qanani -Shillimii- New Ethiopian Oromo Music 2022",
+      "embedUrl": "https://www.youtube.com/embed/V0DXodXb9Zc"
     },
     {
-      "id": "fRh_vgS2dFE",
-      "title": "Scene Study Review",
-      "description": "Students review recorded scenes with mentors.",
-      "embedUrl": "https://www.youtube.com/embed/Gd6g6RoRBlg"
+      "id": "oNl3p54M0Gc",
+      "title": "Darammasi",
+      "description": "Helen Berhe - Darammasi - New Ethiopian Music 2023",
+      "embedUrl": "https://www.youtube.com/embed/oNl3p54M0Gc"
     }
   ],
   "movieTrailers": [
     {
-      "id": "dQw4w9WgXcQ",
-      "title": "Echoes of Tomorrow",
-      "description": "Festival-bound short exploring legacy and redemption.",
-      "embedUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+      "id": "YklZAAVkWXs",
+      "title": "Abba Malkaa",
+      "description": "Abbaa Malkaa is a landmark 2025 Afaan Oromoo family drama film directed by Lencho Fikru that explores social stigma and cultural identity in 1970s Ethiopia.",
+      "embedUrl": "https://www.youtube.com/embed/YklZAAVkWXs"
     },
     {
-      "id": "J---aiyznGQ",
-      "title": "Silent Voices",
-      "description": "Documentary trailer on pioneering women in cinema.",
-      "embedUrl": "https://www.youtube.com/embed/J---aiyznGQ"
+      "id": "YklZAAVkWXs",
+      "title": "Abba Malkaa",
+      "description": "Abbaa Malkaa is a landmark 2025 Afaan Oromoo family drama film directed by Lencho Fikru that explores social stigma and cultural identity in 1970s Ethiopia.",
+      "embedUrl": "https://www.youtube.com/embed/YklZAAVkWXs"
     },
     {
-      "id": "9bZkp7q19f0",
-      "title": "Midnight Frequency",
-      "description": "Thriller teaser with kinetic edits and bold color.",
-      "embedUrl": "https://www.youtube.com/embed/9bZkp7q19f0"
+      "id": "YklZAAVkWXs",
+      "title": "Abba Malkaa",
+      "description": "Abbaa Malkaa is a landmark 2025 Afaan Oromoo family drama film directed by Lencho Fikru that explores social stigma and cultural identity in 1970s Ethiopia.",
+      "embedUrl": "https://www.youtube.com/embed/YklZAAVkWXs"
     }
+    
   ]
 }

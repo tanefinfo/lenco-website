@@ -1,0 +1,49 @@
+{
+  "festivals": [
+    {
+      "id": "fest-adi-2024",
+      "title": "Addis International Film Festival",
+      "year": "2024",
+      "dates": "Nov 12-17, 2024",
+      "location": "Addis Ababa, Ethiopia",
+      "type": "upcoming",
+      "image": "https://images.unsplash.com/photo-1521336575822-6da63fb45455?auto=format&fit=crop&w=1400&q=80",
+      "description": "Spotlight screening with director Q&A and cinematography lab.",
+      "link": "https://lenchofikiru.com/festivals/addis-2024",
+      "spotlight": "Headline Ethiopian feature with Dolby Atmos mix demo."
+    },
+    {
+      "id": "fest-gondar-2024",
+      "title": "Gondar Cinema Nights",
+      "year": "2024",
+      "dates": "Aug 22-24, 2024",
+      "location": "Gondar, Ethiopia",
+      "type": "upcoming",
+      "image": "https://images.unsplash.com/photo-1521292270410-a8c53642e958?auto=format&fit=crop&w=1400&q=80",
+      "description": "Outdoor courtyard screening with live score collaboration.",
+      "spotlight": "Premiere of the short film 'Stone & Light'."
+    },
+    {
+      "id": "fest-ziif-2023",
+      "title": "Zanzibar International Film Festival",
+      "year": "2023",
+      "dates": "Jul 1-8, 2023",
+      "location": "Stone Town, Tanzania",
+      "type": "past",
+      "image": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1400&q=80",
+      "description": "Competition slot with cultural storytelling panel.",
+      "link": "https://lenchofikiru.com/festivals/ziif-2023"
+    },
+    {
+      "id": "fest-panafrica-2023",
+      "title": "Pan-African Film Week",
+      "year": "2023",
+      "dates": "Oct 10-14, 2023",
+      "location": "Nairobi, Kenya",
+      "type": "past",
+      "image": "https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&w=1400&q=80",
+      "description": "Showcase screening and industry networking roundtable.",
+      "spotlight": "Featured Ethiopia-first production design case study."
+    }
+  ]
+}

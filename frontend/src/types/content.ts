@@ -6,10 +6,7 @@ export type ProductCategory =
   | "Lighting"
   | "Audio"
   | "Prints";
-export type StoryCategory =
-  | "Behind the Scenes"
-  | "Academy Success"
-  | "Industry Insights";
+export type StoryCategory = "Behind the Scenes" | "Industry Insights";
 export type EventType = "upcoming" | "past";
 
 export interface ProjectCredit {
@@ -115,4 +112,44 @@ export interface Profile {
 export interface Testimonial {
   quote: string;
   author: string;
+}
+
+export type GalleryCategory =
+  | "Portraits"
+  | "Behind the Scenes"
+  | "On Set"
+  | "Events";
+
+export interface Gallery {
+  id: string;
+  title: string;
+  category: GalleryCategory;
+  cover: string;
+  images: string[];
+  description?: string;
+}
+
+export interface Festival {
+  id: string;
+  title: string;
+  year: string;
+  dates?: string;
+  location: string;
+  image: string;
+  type: EventType;
+  description?: string;
+  link?: string;
+  spotlight?: string;
+}
+
+export interface Award {
+  id: string;
+  title: string;
+  year: string;
+  category: string;
+  placement?: string;
+  issuer?: string;
+  project?: string;
+  image: string;
+  description?: string;
 }

@@ -8,22 +8,23 @@ const navLinks = [
   { name: "Home", path: "/" },
   { name: "About", path: "/about" },
   { name: "Works", path: "/works" },
-  { name: "Products", path: "/products" },
-  { name: "Studio", path: "/studio" },
-  { name: "Stories", path: "/stories" },
+  { name: "Awards", path: "/awards" },
+  { name: "Galleries", path: "/galleries" },
   { name: "Events", path: "/events" },
+  { name: "Festivals", path: "/festivals" },
+  { name: "Studio", path: "/studio" },
   { name: "Contact", path: "/contact" },
 ];
 
-const academyLink = { name: "Abba Lata Acting Academy", path: "/academy" };
+const productsLink = { name: "Products", path: "/products" };
 
 const languages = [
   { label: "English", value: "en", short: "En", flagSrc: "/img/flags/gb.svg" },
   { label: "Amharic", value: "am", short: "Am", flagSrc: "/img/flags/et.svg" },
   {
-    label: "Oromiffa",
-    value: "om",
-    short: "Om",
+    label: "Afan Oromo",
+    value: "ao",
+    short: "Ao",
     flagSrc: "/img/flags/et.svg",
   },
 ];
@@ -87,10 +88,12 @@ export function Header() {
               size="sm"
               className="ml-3 shadow-md"
               variant={
-                location.pathname === academyLink.path ? "secondary" : "default"
+                location.pathname === productsLink.path
+                  ? "secondary"
+                  : "default"
               }
             >
-              <Link to={academyLink.path}>{academyLink.name}</Link>
+              <Link to={productsLink.path}>{productsLink.name}</Link>
             </Button>
 
             {/* CUSTOM LANGUAGE DROPDOWN */}
@@ -102,7 +105,6 @@ export function Header() {
                 onClick={() => setLangOpen(!langOpen)}
                 className="flex items-center gap-2 rounded-full bg-gradient-to-r from-primary/15 via-background to-muted/60 px-3 py-1.5 text-sm font-semibold shadow-sm ring-1 ring-border/70 hover:ring-primary/50 transition"
               >
-                <Globe2 className="h-4 w-4 text-primary" />
                 <img
                   src={language.flagSrc}
                   alt={`${language.label} flag`}
@@ -207,16 +209,16 @@ export function Header() {
                 size="lg"
                 className="mt-2"
                 variant={
-                  location.pathname === academyLink.path
+                  location.pathname === productsLink.path
                     ? "secondary"
                     : "default"
                 }
               >
                 <Link
-                  to={academyLink.path}
+                  to={productsLink.path}
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  {academyLink.name}
+                  {productsLink.name}
                 </Link>
               </Button>
             </div>
