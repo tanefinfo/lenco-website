@@ -9,6 +9,7 @@ use App\Http\Controllers\ContentController;
 use App\Http\Controllers\AwardController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Api\GalleryController;
+use App\Http\Controllers\Api\EventController;
 
 Route::post('/login', [AuthController::class, 'login']);
 
@@ -75,4 +76,10 @@ Route::post('/galleries', [GalleryController::class, 'store']);
 Route::put('/galleries/{id}', [GalleryController::class, 'update']);
 Route::delete('/galleries/{id}', [GalleryController::class, 'destroy']);
 
+
+Route::get('/events', [EventController::class, 'index']);
+Route::get('/events/{id}', [EventController::class, 'show']);
+Route::post('/events', [EventController::class, 'store']);
+Route::put('/events/{id}', [EventController::class, 'update']);
+Route::delete('/events/{id}', [EventController::class, 'destroy']);
 
