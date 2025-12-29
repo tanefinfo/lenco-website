@@ -1,0 +1,68 @@
+{
+  "musicVideos": [
+    {
+      "id": "l482T0yNkeo",
+      "title": "Oromo Anthem",
+      "description": "Emotive performance-driven video highlighting Oromo culture.",
+      "embedUrl": "https://www.youtube.com/embed/-jGSKLtDEC8"
+    },
+    {
+      "id": "Zi_XLOBDo_Y",
+      "title": "Night Drive",
+      "description": "Moody neon visuals for a late-night Afrobeats track.",
+      "embedUrl": "https://www.youtube.com/embed/mmTj8XmpPjI"
+    },
+    {
+      "id": "fRh_vgS2dFE",
+      "title": "City Lights",
+      "description": "High-energy choreography with fast lens moves.",
+      "embedUrl": "https://www.youtube.com/embed/fRh_vgS2dFE"
+    }
+  ],
+  "academyVideos": [
+    {
+      "id": "dQw4w9WgXcQ",
+      "title": "Academy Session: Acting Basics",
+      "description": "On-camera fundamentals with blocking drills.",
+      "embedUrl": "https://www.youtube.com/embed/jlp5Nbxg-vM"
+    },
+    {
+      "id": "Zi_XLOBDo_Y",
+      "title": "Workshop: Blocking for Camera",
+      "description": "Staging movement for music videos and scenes.",
+      "embedUrl": "https://www.youtube.com/embed/ZQVqbwSDBMc"
+    },
+    {
+      "id": "l482T0yNkeo",
+      "title": "Performance Coaching Lab",
+      "description": "Voice and gesture coaching for close-ups.",
+      "embedUrl": "https://www.youtube.com/embed/RGrPKKg0Rts"
+    },
+    {
+      "id": "fRh_vgS2dFE",
+      "title": "Scene Study Review",
+      "description": "Students review recorded scenes with mentors.",
+      "embedUrl": "https://www.youtube.com/embed/Gd6g6RoRBlg"
+    }
+  ],
+  "movieTrailers": [
+    {
+      "id": "dQw4w9WgXcQ",
+      "title": "Echoes of Tomorrow",
+      "description": "Festival-bound short exploring legacy and redemption.",
+      "embedUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+    },
+    {
+      "id": "J---aiyznGQ",
+      "title": "Silent Voices",
+      "description": "Documentary trailer on pioneering women in cinema.",
+      "embedUrl": "https://www.youtube.com/embed/J---aiyznGQ"
+    },
+    {
+      "id": "9bZkp7q19f0",
+      "title": "Midnight Frequency",
+      "description": "Thriller teaser with kinetic edits and bold color.",
+      "embedUrl": "https://www.youtube.com/embed/9bZkp7q19f0"
+    }
+  ]
+}

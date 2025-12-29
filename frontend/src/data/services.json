@@ -1,0 +1,88 @@
+{
+  "services": [
+    {
+      "id": "film-production",
+      "title": "Film Production",
+      "description": "Full-service film production from concept to delivery, including feature films, shorts, and documentaries.",
+      "icon": "Film",
+      "features": [
+        "Script Development",
+        "Pre-Production Planning",
+        "Principal Photography",
+        "Post-Production & VFX",
+        "Distribution Support"
+      ]
+    },
+    {
+      "id": "music-production",
+      "title": "Music Production",
+      "description": "Professional music production, recording, mixing, and mastering services for artists and labels.",
+      "icon": "Music",
+      "features": [
+        "Beat Production",
+        "Recording Sessions",
+        "Mixing & Mastering",
+        "Sound Design",
+        "Artist Development"
+      ]
+    },
+    {
+      "id": "commercial-production",
+      "title": "Commercial Production",
+      "description": "High-quality commercial and branded content for local and international brands.",
+      "icon": "Video",
+      "features": [
+        "Brand Strategy",
+        "Creative Development",
+        "Production & Shooting",
+        "Post-Production",
+        "Multi-Platform Delivery"
+      ]
+    },
+    {
+      "id": "talent-management",
+      "title": "Talent & Casting",
+      "description": "Access to Nigeria's finest actors, musicians, and creative talent for your projects.",
+      "icon": "Users",
+      "features": [
+        "Actor Casting",
+        "Musician Booking",
+        "Voice-Over Artists",
+        "Background Talent",
+        "Talent Representation"
+      ]
+    }
+  ],
+  "workflow": [
+    {
+      "step": 1,
+      "title": "Discovery",
+      "description": "We begin with a deep dive into your vision, goals, and creative requirements."
+    },
+    {
+      "step": 2,
+      "title": "Concept",
+      "description": "Our team develops creative concepts and presents detailed proposals for your approval."
+    },
+    {
+      "step": 3,
+      "title": "Pre-Production",
+      "description": "Meticulous planning including casting, location scouting, and technical preparation."
+    },
+    {
+      "step": 4,
+      "title": "Production",
+      "description": "Professional execution with state-of-the-art equipment and experienced crew."
+    },
+    {
+      "step": 5,
+      "title": "Post-Production",
+      "description": "Expert editing, color grading, sound design, and VFX to bring your vision to life."
+    },
+    {
+      "step": 6,
+      "title": "Delivery",
+      "description": "Final delivery in all required formats with ongoing support for distribution."
+    }
+  ]
+}
