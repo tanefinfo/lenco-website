@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AboutContentController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\AwardController;
+use App\Http\Controllers\ContactController;
 
 Route::post('/login', [AuthController::class, 'login']);
 
@@ -57,5 +58,15 @@ Route::prefix('awards')->group(function () {
     Route::put('/{id}', [AwardController::class, 'update']);
     Route::delete('/{id}', [AwardController::class, 'destroy']);
 });
+
+
+Route::prefix('contact')->group(function () {
+    Route::post('/', [ContactController::class, 'store']);
+    Route::get('/', [ContactController::class, 'index']);
+    Route::get('/{id}', [ContactController::class, 'show']);
+    Route::put('/{id}', [ContactController::class, 'update']);
+    Route::delete('/{id}', [ContactController::class, 'destroy']);
+});
+
 
 
