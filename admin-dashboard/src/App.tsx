@@ -19,6 +19,7 @@ import AppLayout from "./layout/AppLayout";
 import { ScrollToTop } from "./components/common/ScrollToTop";
 import Home from "./pages/Dashboard/Home";
 import Login from "./pages/Login";
+import CreateAbout from "./pages/About/CreateAbout";
 
 export default function App() {
     return (
@@ -38,6 +39,10 @@ export default function App() {
                         <Route
                             path="/form-elements"
                             element={<FormElements />}
+                        />
+                        <Route
+                            path="/about"
+                            element={<CreateAbout />}
                         />
 
                         {/* Tables */}

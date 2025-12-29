@@ -20,7 +20,7 @@ const navItems: NavItem[] = [
   {
     name: "Home",
     icon: <Home size={20} />,
-    path: "/",
+    path: "/home",
   },
   {
     name: "About",
