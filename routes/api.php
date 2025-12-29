@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\GalleryController;
 use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\FestivalController;
 use App\Http\Controllers\Api\ServiceController;
+use App\Http\Controllers\Api\ProductController;
 
 Route::post('/login', [AuthController::class, 'login']);
 
@@ -103,3 +104,12 @@ Route::get('/services/{service}', [ServiceController::class, 'show']);
 Route::post('/services', [ServiceController::class, 'store']);
 Route::put('/services/{service}', [ServiceController::class, 'update']);
 Route::delete('/services/{service}', [ServiceController::class, 'destroy']);
+
+
+Route::prefix('products')->group(function () {
+    Route::get('/', [ProductController::class, 'index']);
+    Route::get('/{id}', [ProductController::class, 'show']);
+    Route::post('/', [ProductController::class, 'store']);
+    Route::put('/{id}', [ProductController::class, 'update']);
+    Route::delete('/{id}', [ProductController::class, 'destroy']);
+});
