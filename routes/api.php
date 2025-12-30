@@ -6,6 +6,15 @@ use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AboutContentController;
 use App\Http\Controllers\ContentController;
+use App\Http\Controllers\AwardController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\Api\GalleryController;
+use App\Http\Controllers\Api\EventController;
+use App\Http\Controllers\Api\FestivalController;
+use App\Http\Controllers\Api\ServiceController;
+use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\TalentController;
+use App\Http\Controllers\Api\TalentApplicationController;
 
 Route::post('/login', [AuthController::class, 'login']);
 
@@ -49,3 +58,75 @@ Route::prefix('contents')->group(function () {
     Route::delete('{id}', [ContentController::class, 'destroy']);
 });
 
+Route::prefix('awards')->group(function () {
+    Route::get('/', [AwardController::class, 'index']);
+    Route::get('/{id}', [AwardController::class, 'show']);
+    Route::post('/', [AwardController::class, 'store']);
+    Route::put('/{id}', [AwardController::class, 'update']);
+    Route::delete('/{id}', [AwardController::class, 'destroy']);
+});
+
+
+Route::prefix('contact')->group(function () {
+    Route::post('/', [ContactController::class, 'store']);
+    Route::get('/', [ContactController::class, 'index']);
+    Route::get('/{id}', [ContactController::class, 'show']);
+    Route::put('/{id}', [ContactController::class, 'update']);
+    Route::delete('/{id}', [ContactController::class, 'destroy']);
+});
+
+Route::get('/galleries', [GalleryController::class, 'index']);
+Route::get('/galleries/{id}', [GalleryController::class, 'show']);
+Route::post('/galleries', [GalleryController::class, 'store']);
+Route::put('/galleries/{id}', [GalleryController::class, 'update']);
+Route::delete('/galleries/{id}', [GalleryController::class, 'destroy']);
+
+
+Route::get('/events', [EventController::class, 'index']);
+Route::get('/events/{id}', [EventController::class, 'show']);
+Route::post('/events', [EventController::class, 'store']);
+Route::put('/events/{id}', [EventController::class, 'update']);
+Route::delete('/events/{id}', [EventController::class, 'destroy']);
+
+
+
+
+Route::prefix('festivals')->group(function () {
+    Route::get('/', [FestivalController::class, 'index']);
+    Route::get('/{id}', [FestivalController::class, 'show']);
+    Route::post('/', [FestivalController::class, 'store']);
+    Route::put('/{id}', [FestivalController::class, 'update']);
+    Route::delete('/{id}', [FestivalController::class, 'destroy']);
+});
+
+// routes/api.php
+
+Route::get('/services', [ServiceController::class, 'index']);
+Route::get('/services/{service}', [ServiceController::class, 'show']);
+Route::post('/services', [ServiceController::class, 'store']);
+Route::put('/services/{service}', [ServiceController::class, 'update']);
+Route::delete('/services/{service}', [ServiceController::class, 'destroy']);
+
+
+Route::prefix('products')->group(function () {
+    Route::get('/', [ProductController::class, 'index']);
+    Route::get('/{id}', [ProductController::class, 'show']);
+    Route::post('/', [ProductController::class, 'store']);
+    Route::put('/{id}', [ProductController::class, 'update']);
+    Route::delete('/{id}', [ProductController::class, 'destroy']);
+});
+
+Route::prefix('talents')->group(function () {
+    Route::get('/', [TalentController::class, 'index']);
+    Route::get('{id}', [TalentController::class, 'show']);
+    Route::post('/', [TalentController::class, 'store']);
+    Route::put('{id}', [TalentController::class, 'update']);
+    Route::delete('{id}', [TalentController::class, 'destroy']);
+
+    Route::post('{id}/apply', [TalentApplicationController::class, 'store']);
+});
+Route::prefix('admin')->group(function () {
+    Route::get('talent-applications', [TalentApplicationController::class, 'index']);
+    Route::get('talent-applications/{id}', [TalentApplicationController::class, 'show']);
+    Route::put('talent-applications/{id}/review', [TalentApplicationController::class, 'review']);
+});
