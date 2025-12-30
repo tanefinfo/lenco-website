@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\AboutContent;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AboutContentController extends Controller
 {
@@ -25,36 +26,18 @@ class AboutContentController extends Controller
     }
 
     /**
-     * POST /api/about/bulk
-     * {
-     *   "en": {...},
-     *   "om": {...}
-     * }
-     */
-    public function bulkStore(Request $request)
-    {
-        foreach (['en', 'om', 'am'] as $lang) {
-            if (!$request->has($lang)) {
-                continue;
-            }
-
-            AboutContent::updateOrCreate(
-                ['lang' => $lang],
-                $request->input($lang)
-            );
-        }
-
-        return response()->json([
-            'message' => 'Contents saved successfully (bulk)'
-        ]);
-    }
-
-    /**
      * POST /api/about
      */
     public function store(Request $request)
     {
         $data = $this->validatePayload($request, true);
+
+        // Handle portrait_local file upload
+        if ($request->hasFile('portrait_local')) {
+            $file = $request->file('portrait_local');
+            $path = $file->store('portraits', 'public');
+            $data['portrait_local'] = '/storage/' . $path;
+        }
 
         $content = AboutContent::create($data);
 
@@ -77,6 +60,19 @@ class AboutContentController extends Controller
 
         $data = $this->validatePayload($request, false);
 
+        // Handle portrait_local file upload
+        if ($request->hasFile('portrait_local')) {
+            $file = $request->file('portrait_local');
+            $path = $file->store('portraits', 'public');
+            $data['portrait_local'] = '/storage/' . $path;
+
+            // Optional: delete old image if exists
+            if ($content->portrait_local) {
+                $oldPath = str_replace('/storage/', '', $content->portrait_local);
+                Storage::disk('public')->delete($oldPath);
+            }
+        }
+
         $content->update($data);
 
         return response()->json([
@@ -96,6 +92,12 @@ class AboutContentController extends Controller
             return response()->json(['message' => 'Content not found'], 404);
         }
 
+        // Delete portrait file if exists
+        if ($content->portrait_local) {
+            $oldPath = str_replace('/storage/', '', $content->portrait_local);
+            Storage::disk('public')->delete($oldPath);
+        }
+
         $content->delete();
 
         return response()->json([
@@ -108,7 +110,7 @@ class AboutContentController extends Controller
      */
     private function validatePayload(Request $request, bool $isCreate): array
     {
-        return $request->validate([
+        $data = $request->validate([
             'lang' => $isCreate
                 ? 'required|string|max:5|unique:about_contents,lang'
                 : 'sometimes|string|max:5',
@@ -118,7 +120,9 @@ class AboutContentController extends Controller
             'hero_subtitle' => 'sometimes|string',
 
             // Portrait
-            'portrait_local' => 'nullable|string',
+            'portrait_local' => $isCreate
+                ? 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048'
+                : 'sometimes|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'portrait_url' => 'nullable|string',
 
             // Profile
@@ -149,5 +153,8 @@ class AboutContentController extends Controller
             'achievement_stats' => 'sometimes|array',
             'milestones' => 'sometimes|array',
         ]);
+
+        return $data;
     }
+
 }
