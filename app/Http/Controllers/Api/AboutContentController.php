@@ -32,12 +32,15 @@ class AboutContentController extends Controller
     {
         $data = $this->validatePayload($request, true);
 
-        // Handle portrait_local file upload
+        // Handle portrait upload
         if ($request->hasFile('portrait_local')) {
             $file = $request->file('portrait_local');
-            $path = $file->store('portraits', 'public');
-            $data['portrait_local'] = '/storage/' . $path;
+            $path = $file->store('about/portraits', 'public');
+            $data['portrait_local'] = $path;
         }
+
+        // Ensure JSON fields are properly encoded
+        $this->encodeJsonFields($data);
 
         $content = AboutContent::create($data);
 
@@ -52,26 +55,24 @@ class AboutContentController extends Controller
      */
     public function update(Request $request, $lang)
     {
-        $content = AboutContent::where('lang', $lang)->first();
-
-        if (!$content) {
-            return response()->json(['message' => 'Content not found'], 404);
-        }
+        $content = AboutContent::where('lang', $lang)->firstOrFail();
 
         $data = $this->validatePayload($request, false);
 
-        // Handle portrait_local file upload
+        // Handle portrait upload
         if ($request->hasFile('portrait_local')) {
-            $file = $request->file('portrait_local');
-            $path = $file->store('portraits', 'public');
-            $data['portrait_local'] = '/storage/' . $path;
-
-            // Optional: delete old image if exists
-            if ($content->portrait_local) {
-                $oldPath = str_replace('/storage/', '', $content->portrait_local);
-                Storage::disk('public')->delete($oldPath);
+            // Delete old file if exists
+            if ($content->portrait_local && Storage::disk('public')->exists($content->portrait_local)) {
+                Storage::disk('public')->delete($content->portrait_local);
             }
+
+            $file = $request->file('portrait_local');
+            $path = $file->store('about/portraits', 'public');
+            $data['portrait_local'] = $path;
         }
+
+        // Encode JSON fields
+        $this->encodeJsonFields($data);
 
         $content->update($data);
 
@@ -92,69 +93,88 @@ class AboutContentController extends Controller
             return response()->json(['message' => 'Content not found'], 404);
         }
 
-        // Delete portrait file if exists
-        if ($content->portrait_local) {
-            $oldPath = str_replace('/storage/', '', $content->portrait_local);
-            Storage::disk('public')->delete($oldPath);
+        // Delete portrait file
+        if ($content->portrait_local && Storage::disk('public')->exists($content->portrait_local)) {
+            Storage::disk('public')->delete($content->portrait_local);
         }
 
         $content->delete();
 
-        return response()->json([
-            'message' => 'Content deleted successfully'
-        ]);
+        return response()->json(['message' => 'Content deleted successfully']);
     }
 
     /**
-     * Centralized validation
+     * Validate request payload
      */
-    private function validatePayload(Request $request, bool $isCreate): array
-    {
-        $data = $request->validate([
-            'lang' => $isCreate
-                ? 'required|string|max:5|unique:about_contents,lang'
-                : 'sometimes|string|max:5',
 
-            // Hero
-            'hero_title' => 'sometimes|string',
-            'hero_subtitle' => 'sometimes|string',
+  private function validatePayload(Request $request, bool $isCreate): array
+{
+    $rule = $isCreate ? 'required' : 'sometimes';
 
-            // Portrait
-            'portrait_local' => $isCreate
-                ? 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048'
-                : 'sometimes|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
-            'portrait_url' => 'nullable|string',
+    return $request->validate([
+        'lang' => $isCreate
+            ? 'required|string|max:5|unique:about_contents,lang'
+            : 'sometimes|string|max:5',
 
-            // Profile
-            'full_name' => 'sometimes|string',
-            'role' => 'sometimes|string',
-            'bio_short' => 'sometimes|string',
-            'bio_long_1' => 'sometimes|string',
-            'bio_long_2' => 'sometimes|string',
+        'hero_title' => "$rule|string",
+        'hero_subtitle' => "$rule|string",
 
-            // Background
-            'background_title' => 'sometimes|string',
-            'background_p1' => 'sometimes|string',
-            'background_p2' => 'sometimes|string',
+        'portrait_local' => $isCreate
+            ? 'image|max:2048'
+            : 'sometimes|image|max:2048',
 
-            // Oromo Work
-            'oromo_work_title' => 'sometimes|string',
-            'oromo_work_p1' => 'sometimes|string',
-            'oromo_work_p2' => 'sometimes|string',
+        'portrait_url' => 'sometimes|url',
 
-            // Vision
-            'vision_title' => 'sometimes|string',
-            'vision_description' => 'sometimes|string',
+        'full_name' => "$rule|string",
+        'role' => "$rule|string",
 
-            // JSON sections
-            'achievement_points' => 'sometimes|array',
-            'social_links' => 'sometimes|array',
-            'philosophies' => 'sometimes|array',
-            'achievement_stats' => 'sometimes|array',
-            'milestones' => 'sometimes|array',
-        ]);
+        'bio_short' => "$rule|string",
+        'bio_long_1' => "$rule|string",
+        'bio_long_2' => "$rule|string",
 
-        return $data;
+        'background_title' => "$rule|string",
+        'background_p1' => "$rule|string",
+        'background_p2' => "$rule|string",
+
+        'oromo_work_title' => "$rule|string",
+        'oromo_work_p1' => "$rule|string",
+        'oromo_work_p2' => "$rule|string",
+
+        'vision_title' => "$rule|string",
+        'vision_description' => "$rule|string",
+
+        // JSON fields come as strings from FormData
+        'achievement_points' => 'sometimes',
+        'social_links' => 'sometimes',
+        'philosophies' => 'sometimes',
+        'achievement_stats' => 'sometimes',
+        'milestones' => 'sometimes',
+    ]);
+}
+
+
+    /**
+     * Encode JSON fields before saving
+     */
+   private function encodeJsonFields(array &$data)
+{
+    $jsonFields = [
+        'achievement_points',
+        'social_links',
+        'philosophies',
+        'achievement_stats',
+        'milestones'
+    ];
+
+    foreach ($jsonFields as $field) {
+        if (isset($data[$field]) && is_string($data[$field])) {
+            $decoded = json_decode($data[$field], true);
+
+            if (json_last_error() === JSON_ERROR_NONE) {
+                $data[$field] = $decoded;
+            }
+        }
     }
+}
 
 }

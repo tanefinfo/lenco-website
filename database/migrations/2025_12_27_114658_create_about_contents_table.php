@@ -24,8 +24,8 @@ return new class extends Migration {
             /* ======================
                Portrait
             ====================== */
-            $table->string('portrait_local')->nullable();
-            $table->string('portrait_url')->nullable();
+            $table->string('portrait_local');
+            $table->string('portrait_url');
 
             /* ======================
                Profile
