@@ -42,12 +42,20 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 Route::prefix('about')->group(function () {
-    Route::get('/', [AboutContentController::class, 'show']);       // READ
-    Route::post('/', [AboutContentController::class, 'store']);     // CREATE
-    Route::put('{lang}', [AboutContentController::class, 'update']); // UPDATE
-    Route::delete('{lang}', [AboutContentController::class, 'destroy']); // DELETE
-    Route::post('/bulk', [AboutContentController::class, 'bulkStore']);
+    // READ: Get content by language, e.g., /api/about?lang=en
+    Route::get('/', [AboutContentController::class, 'show']);
 
+    // CREATE: Add a new content for a specific language
+    Route::post('/', [AboutContentController::class, 'store']);
+
+    // UPDATE: Update content for a specific language, e.g., /api/about/en
+    Route::put('{lang}', [AboutContentController::class, 'update']);
+
+    // DELETE: Delete content for a specific language, e.g., /api/about/en
+    Route::delete('{lang}', [AboutContentController::class, 'destroy']);
+
+    // BULK CREATE/UPDATE: Add or update multiple languages at once
+    Route::post('/bulk', [AboutContentController::class, 'bulkStore']);
 });
 
 Route::prefix('contents')->group(function () {

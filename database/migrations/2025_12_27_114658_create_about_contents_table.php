@@ -10,36 +10,95 @@ return new class extends Migration {
         Schema::create('about_contents', function (Blueprint $table) {
             $table->id();
 
-            // language
+            /* ======================
+               Language
+            ====================== */
             $table->string('lang', 5); // en | om | am
 
-            // hero
+            /* ======================
+               Hero Section
+            ====================== */
             $table->string('hero_title');
             $table->text('hero_subtitle');
 
-            // profile
+            /* ======================
+               Portrait
+            ====================== */
+            $table->string('portrait_local')->nullable();
+            $table->string('portrait_url')->nullable();
+
+            /* ======================
+               Profile
+            ====================== */
             $table->string('full_name');
             $table->string('role');
             $table->text('bio_short');
             $table->text('bio_long_1');
             $table->text('bio_long_2');
 
-            // sections
+            /* ======================
+               Background Section
+            ====================== */
             $table->string('background_title');
             $table->text('background_p1');
             $table->text('background_p2');
 
+            /* ======================
+               Oromo Work Section
+            ====================== */
             $table->string('oromo_work_title');
             $table->text('oromo_work_p1');
             $table->text('oromo_work_p2');
 
-            // vision
+            /* ======================
+               Vision Section
+            ====================== */
             $table->string('vision_title');
             $table->text('vision_description');
 
+            /* ======================
+               Achievements (Bullets)
+               ex:
+               [
+                 "Directed award-winning Oromo music videos",
+                 "Mentored aspiring actors"
+               ]
+            ====================== */
+            $table->json('achievement_points');
+
+            /* ======================
+               Social Links
+               { instagram, facebook }
+            ====================== */
+            $table->json('social_links');
+
+            /* ======================
+               Philosophy Cards
+               [
+                 { title, description }
+               ]
+            ====================== */
+            $table->json('philosophies');
+
+            /* ======================
+               Stats (By The Numbers)
+               [
+                 { label, value, icon }
+               ]
+               icon = Film | Music | Award | Users
+            ====================== */
+            $table->json('achievement_stats');
+
+            /* ======================
+               Milestones / Highlights
+               [
+                 { year, title, detail }
+               ]
+            ====================== */
+            $table->json('milestones');
+
             $table->timestamps();
 
-            // optional safety
             $table->unique(['lang']);
         });
     }
@@ -49,4 +108,3 @@ return new class extends Migration {
         Schema::dropIfExists('about_contents');
     }
 };
-

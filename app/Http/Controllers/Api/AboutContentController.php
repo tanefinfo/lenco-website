@@ -8,7 +8,9 @@ use Illuminate\Http\Request;
 
 class AboutContentController extends Controller
 {
-    // ✅ READ (already exists)
+    /**
+     * GET /api/about?lang=en
+     */
     public function show(Request $request)
     {
         $lang = $request->query('lang', 'en');
@@ -22,51 +24,37 @@ class AboutContentController extends Controller
         return response()->json($content);
     }
 
+    /**
+     * POST /api/about/bulk
+     * {
+     *   "en": {...},
+     *   "om": {...}
+     * }
+     */
     public function bulkStore(Request $request)
-{
-    $languages = ['en', 'om', 'am'];
+    {
+        foreach (['en', 'om', 'am'] as $lang) {
+            if (!$request->has($lang)) {
+                continue;
+            }
 
-    foreach ($languages as $lang) {
-        if (!$request->has($lang)) {
-            continue; // skip if not sent
+            AboutContent::updateOrCreate(
+                ['lang' => $lang],
+                $request->input($lang)
+            );
         }
 
-        AboutContent::updateOrCreate(
-            ['lang' => $lang],      // find by language
-            $request->input($lang)  // data for that language
-        );
+        return response()->json([
+            'message' => 'Contents saved successfully (bulk)'
+        ]);
     }
 
-    return response()->json([
-        'message' => 'Contents saved successfully (bulk)'
-    ]);
-}
-
+    /**
+     * POST /api/about
+     */
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'lang' => 'required|string|max:5|unique:about_contents,lang',
-
-            'hero_title' => 'required|string',
-            'hero_subtitle' => 'required|string',
-
-            'full_name' => 'required|string',
-            'role' => 'required|string',
-            'bio_short' => 'required|string',
-            'bio_long_1' => 'required|string',
-            'bio_long_2' => 'required|string',
-
-            'background_title' => 'required|string',
-            'background_p1' => 'required|string',
-            'background_p2' => 'required|string',
-
-            'oromo_work_title' => 'required|string',
-            'oromo_work_p1' => 'required|string',
-            'oromo_work_p2' => 'required|string',
-
-            'vision_title' => 'required|string',
-            'vision_description' => 'required|string',
-        ]);
+        $data = $this->validatePayload($request, true);
 
         $content = AboutContent::create($data);
 
@@ -76,7 +64,9 @@ class AboutContentController extends Controller
         ], 201);
     }
 
-    // ✅ UPDATE (EDIT)
+    /**
+     * PUT /api/about/{lang}
+     */
     public function update(Request $request, $lang)
     {
         $content = AboutContent::where('lang', $lang)->first();
@@ -85,7 +75,9 @@ class AboutContentController extends Controller
             return response()->json(['message' => 'Content not found'], 404);
         }
 
-        $content->update($request->all());
+        $data = $this->validatePayload($request, false);
+
+        $content->update($data);
 
         return response()->json([
             'message' => 'Content updated successfully',
@@ -93,7 +85,9 @@ class AboutContentController extends Controller
         ]);
     }
 
-    // ✅ DELETE
+    /**
+     * DELETE /api/about/{lang}
+     */
     public function destroy($lang)
     {
         $content = AboutContent::where('lang', $lang)->first();
@@ -108,5 +102,52 @@ class AboutContentController extends Controller
             'message' => 'Content deleted successfully'
         ]);
     }
-}
 
+    /**
+     * Centralized validation
+     */
+    private function validatePayload(Request $request, bool $isCreate): array
+    {
+        return $request->validate([
+            'lang' => $isCreate
+                ? 'required|string|max:5|unique:about_contents,lang'
+                : 'sometimes|string|max:5',
+
+            // Hero
+            'hero_title' => 'sometimes|string',
+            'hero_subtitle' => 'sometimes|string',
+
+            // Portrait
+            'portrait_local' => 'nullable|string',
+            'portrait_url' => 'nullable|string',
+
+            // Profile
+            'full_name' => 'sometimes|string',
+            'role' => 'sometimes|string',
+            'bio_short' => 'sometimes|string',
+            'bio_long_1' => 'sometimes|string',
+            'bio_long_2' => 'sometimes|string',
+
+            // Background
+            'background_title' => 'sometimes|string',
+            'background_p1' => 'sometimes|string',
+            'background_p2' => 'sometimes|string',
+
+            // Oromo Work
+            'oromo_work_title' => 'sometimes|string',
+            'oromo_work_p1' => 'sometimes|string',
+            'oromo_work_p2' => 'sometimes|string',
+
+            // Vision
+            'vision_title' => 'sometimes|string',
+            'vision_description' => 'sometimes|string',
+
+            // JSON sections
+            'achievement_points' => 'sometimes|array',
+            'social_links' => 'sometimes|array',
+            'philosophies' => 'sometimes|array',
+            'achievement_stats' => 'sometimes|array',
+            'milestones' => 'sometimes|array',
+        ]);
+    }
+}
