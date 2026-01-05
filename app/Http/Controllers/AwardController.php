@@ -8,26 +8,25 @@ use Illuminate\Http\Request;
 class AwardController extends Controller
 {
     //  Get all awards (with language support)
-    public function index(Request $request)
-    {
-        $lang = $request->get('lang', 'en');
+   public function index(Request $request)
+{
+    $lang = $request->query('lang', 'en');
 
-        $awards = Award::latest()->get()->map(function ($award) use ($lang) {
-            return [
-                'id' => $award->id,
-                'year' => $award->year,
-                'category' => $award->category,
-                'placement' => $award->placement,
-                'issuer' => $award->issuer,
-                'project' => $award->project,
-                'image' => $award->image,
-                'title' => $award->{"title_$lang"} ?? $award->title_en,
-                'description' => $award->{"description_$lang"} ?? $award->description_en,
-            ];
-        });
+    return Award::all()->map(function ($award) use ($lang) {
+        return [
+            'id' => $award->id,
+            'year' => $award->year,
+            'category' => $award->category,
+            'placement' => $award->placement,
+            'issuer' => $award->issuer,
+            'project' => $award->project,
+            'image' => $award->image,
+            'title' => $award->{"title_$lang"},
+            'description' => $award->{"description_$lang"},
+        ];
+    });
+}
 
-        return response()->json($awards);
-    }
 
     //  Store new award
     public function store(Request $request)

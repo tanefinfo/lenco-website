@@ -143,13 +143,14 @@ export interface Festival {
 }
 
 export interface Award {
-  id: string;
+  id: number;               // ← Laravel returns integer
   title: string;
-  year: string;
+  year: number;             // ← integer (important for sorting)
   category: string;
-  placement?: string;
-  issuer?: string;
-  project?: string;
+  placement?: string | null;
+  issuer?: string | null;
+  project?: string | null;
   image: string;
-  description?: string;
+  description?: string | null;
 }
+

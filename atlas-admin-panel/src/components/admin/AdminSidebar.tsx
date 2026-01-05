@@ -41,7 +41,9 @@ const navItems: NavItem[] = [
   { key: 'services', path: '/admin/services', icon: Wrench },
   { key: 'contact', path: '/admin/contact', icon: Mail },
   { key: 'products', path: '/admin/products', icon: Package },
+  { key: 'awards', path: '/admin/awards', icon: Sparkles }, // <-- added
 ];
+
 
 const secondaryItems: NavItem[] = [
   { key: 'talents', path: '/admin/talents', icon: Sparkles },
