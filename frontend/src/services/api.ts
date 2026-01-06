@@ -26,6 +26,10 @@ import testimonialsData from "@/data/testimonials.json";
 import api from "@/lib/api";
 import type { Gallery } from "@/types/content";
 
+import { useQuery } from "@tanstack/react-query";
+// import { api } from "@/lib/api";
+// import type { Gallery } from "@/types/content";
+
 export async function getProjects(): Promise<Project[]> {
   return projectsData.projects as Project[];
 }
@@ -115,18 +119,26 @@ import awardsData from "@/data/awards.json";
 
 
 
-export async function getGalleries(): Promise<Gallery[]> {
-  const res = await api.get("/galleries");
 
+
+export async function getGalleries(lang: string): Promise<Gallery[]> {
+  const res = await api.get(`/galleries?lang=${lang}`);
   return res.data.map((item: any) => ({
     id: item.id,
     title: item.title,
     description: item.description ?? "",
-    category: normalizeCategory(item.category),
+    category: normalizeCategory(item.category, lang),
     cover: item.cover,
     images: normalizeImages(item.images),
   }));
 }
+
+export function useGalleries(lang: string) {
+  return useQuery(["galleries", lang], () => getGalleries(lang), {
+    staleTime: 1000 * 60, // optional: 1 minute
+  });
+}
+
 
 const API_URL = import.meta.env.VITE_API_URL;
 const STORAGE_URL = `${API_URL}/storage`;
@@ -155,17 +167,24 @@ function normalizeImages(images: any[]): string[] {
 }
 
 
-function normalizeCategory(category: string): string {
-  const map: Record<string, string> = {
-    portraits: "Portraits",
-    bts: "Behind the Scenes",
-    onset: "On Set",
-    events: "Events",
-  };
+// function normalizeCategory(category: string): string {
+//   const map: Record<string, string> = {
+//     portraits: "Portraits",
+//     bts: "Behind the Scenes",
+//     onset: "On Set",
+//     events: "Events",
+//   };
 
-  return map[category?.toLowerCase()] ?? category;
+const categoryMap: Record<string, Record<string, string>> = {
+  portraits: { en: "Portraits", am: "ስዕሎች", ao: "Fayyadama" },
+  bts: { en: "Behind the Scenes", am: "የፊልም ከፊል", ao: "Dabaree Keessa" },
+  onset: { en: "On Set", am: "በሴት ላይ", ao: "Maqaa" },
+  events: { en: "Events", am: "ክስተቶች", ao: "Dhufaa" },
+};
+
+  function normalizeCategory(category: string, lang: string): string {
+  return categoryMap[category?.toLowerCase()]?.[lang] ?? category;
 }
-
 
 
 
