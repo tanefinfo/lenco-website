@@ -23,6 +23,8 @@ import servicesData from "@/data/services.json";
 import videosData from "@/data/videos.json";
 import profileData from "@/data/profile.json";
 import testimonialsData from "@/data/testimonials.json";
+import api from "@/lib/api";
+import type { Gallery } from "@/types/content";
 
 export async function getProjects(): Promise<Project[]> {
   return projectsData.projects as Project[];
@@ -106,9 +108,69 @@ import galleriesData from "@/data/galleries.json";
 import festivalsData from "@/data/festivals.json";
 import awardsData from "@/data/awards.json";
 
+
+
+
+
+
+
+
 export async function getGalleries(): Promise<Gallery[]> {
-  return galleriesData.galleries as Gallery[];
+  const res = await api.get("/galleries");
+
+  return res.data.map((item: any) => ({
+    id: item.id,
+    title: item.title,
+    description: item.description ?? "",
+    category: normalizeCategory(item.category),
+    cover: item.cover,
+    images: normalizeImages(item.images),
+  }));
 }
+
+const API_URL = import.meta.env.VITE_API_URL;
+const STORAGE_URL = `${API_URL}/storage`;
+
+
+
+function normalizeImages(images: any[]): string[] {
+  if (!images || images.length === 0) return [];
+
+  // already correct
+  if (typeof images[0] === "string" && !images[0].includes("[")) {
+    return images;
+  }
+
+  try {
+    const raw = images[0].replace(`${STORAGE_URL}/`, "");
+
+    const parsed = JSON.parse(raw);
+
+    return parsed.map(
+      (img: string) => `${STORAGE_URL}/${img}`
+    );
+  } catch {
+    return [];
+  }
+}
+
+
+function normalizeCategory(category: string): string {
+  const map: Record<string, string> = {
+    portraits: "Portraits",
+    bts: "Behind the Scenes",
+    onset: "On Set",
+    events: "Events",
+  };
+
+  return map[category?.toLowerCase()] ?? category;
+}
+
+
+
+
+
+
 
 export async function getFestivals(): Promise<Festival[]> {
   return festivalsData.festivals as Festival[];

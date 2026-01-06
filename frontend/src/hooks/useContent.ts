@@ -157,6 +157,7 @@ export function useGalleries() {
   });
 }
 
+
 export function useFestivals() {
   return useQuery<Festival[]>({
     queryKey: ["festivals"],

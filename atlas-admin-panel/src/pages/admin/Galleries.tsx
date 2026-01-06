@@ -245,6 +245,12 @@ const Galleries: React.FC = () => {
     ),
   },
 ];
+const CATEGORY_MAP: Record<string, string> = {
+  portraits: "Portraits",
+  bts: "Behind the Scenes",
+  onset: "On Set",
+  events: "Events",
+};
 
 
   return (
@@ -272,16 +278,27 @@ const Galleries: React.FC = () => {
             </DialogTitle>
           </DialogHeader>
 
-          <div className="space-y-4">
-            <div>
-              <Label>Category</Label>
-              <Input
-                value={form.category}
-                onChange={(e) =>
-                  setForm({ ...form, category: e.target.value })
-                }
-              />
-            </div>
+        <div>
+  <Label>Category</Label>
+  <select
+    className="w-full border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-black"
+    value={form.category}
+    onChange={(e) =>
+      setForm({ ...form, category: e.target.value })
+    }
+  >
+    <option value="" disabled>
+      Select category
+    </option>
+
+    {Object.entries(CATEGORY_MAP).map(([key, label]) => (
+      <option key={key} value={key}>
+        {label}
+      </option>
+    ))}
+  </select>
+          
+
 
             <div>
               <Label>Cover Image</Label>
