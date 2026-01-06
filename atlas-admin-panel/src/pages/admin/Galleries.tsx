@@ -14,12 +14,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-import {
-  Tabs,
-  TabsList,
-  TabsTrigger,
-  TabsContent,
-} from '@/components/ui/tabs';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { api } from '@/lib/api';
 import Swal from 'sweetalert2';
 
@@ -30,7 +25,7 @@ interface GalleryRow {
   id: number;
   title: string;
   category: string;
-  cover: string;      // ✅ ADD THIS
+  cover: string;
   images: string[];
 }
 
@@ -50,9 +45,7 @@ interface GalleryForm {
   or: LangForm;
 }
 
-
 const emptyLangForm: LangForm = { title: '', description: '' };
-
 const emptyForm: GalleryForm = {
   category: '',
   cover: null,
@@ -70,57 +63,43 @@ const Galleries: React.FC = () => {
   const [form, setForm] = useState<GalleryForm>({ ...emptyForm });
   const [loading, setLoading] = useState(false);
 
-  /* ================= LOAD ================= */
+  /** ================= LOAD ================= */
   const loadGalleries = async () => {
-    const res = await api.get('/galleries', {
-      params: { lang: language },
-    });
-    setGalleries(res.data);
+    try {
+      const res = await api.get('/galleries', { params: { lang: language } });
+      setGalleries(res.data);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   useEffect(() => {
     loadGalleries();
   }, [language]);
 
-  /* ================= EDIT ================= */
+  /** ================= EDIT ================= */
   const handleEdit = async (row: GalleryRow) => {
-  const res = await api.get(`/galleries/${row.id}`);
+    const res = await api.get(`/galleries/${row.id}`);
+    const data = res.data;
 
-  setForm({
-    category: res.data.category,
-    cover: null,
-    images: [],
-    existingCover: res.data.cover,
-    existingImages: res.data.images || [],
+    setForm({
+      category: data.category,
+      cover: null,
+      images: [],
+      existingCover: data.cover,
+      existingImages: data.images || [],
+      en: { title: data.title_en, description: data.description_en || '' },
+      am: { title: data.title_am, description: data.description_am || '' },
+      or: { title: data.title_or, description: data.description_or || '' },
+    });
 
-    en: {
-      title: res.data.title_en,
-      description: res.data.description_en || '',
-    },
-    am: {
-      title: res.data.title_am,
-      description: res.data.description_am || '',
-    },
-    or: {
-      title: res.data.title_or,
-      description: res.data.description_or || '',
-    },
-  });
+    setEditingId(row.id);
+    setOpen(true);
+  };
 
-  setEditingId(row.id);
-  setOpen(true);
-};
-
-  /* ================= FORM ================= */
-  const updateLangField = (
-    lang: Lang,
-    field: keyof LangForm,
-    value: string
-  ) => {
-    setForm((prev) => ({
-      ...prev,
-      [lang]: { ...prev[lang], [field]: value },
-    }));
+  /** ================= FORM ================= */
+  const updateLangField = (lang: Lang, field: keyof LangForm, value: string) => {
+    setForm((prev) => ({ ...prev, [lang]: { ...prev[lang], [field]: value } }));
   };
 
   const resetForm = () => {
@@ -128,18 +107,14 @@ const Galleries: React.FC = () => {
     setEditingId(null);
   };
 
-  /* ================= SAVE ================= */
-
-
-
+  /** ================= SAVE ================= */
   const handleSave = async () => {
-    if (!form.cover && !editingId) {
-      Swal.fire({
+    if (!form.cover && !editingId && !form.existingCover) {
+      return Swal.fire({
         icon: 'warning',
         title: 'Cover image required',
         text: 'Please upload a cover image.',
       });
-      return;
     }
 
     setLoading(true);
@@ -156,10 +131,7 @@ const Galleries: React.FC = () => {
       if (form.cover) fd.append('cover', form.cover);
       form.images.forEach((img) => fd.append('images[]', img));
 
-      const url = editingId
-        ? `/galleries/${editingId}?_method=PUT`
-        : '/galleries';
-
+      const url = editingId ? `/galleries/${editingId}?_method=PUT` : '/galleries';
       await api.post(url, fd);
 
       Swal.fire({
@@ -185,7 +157,7 @@ const Galleries: React.FC = () => {
     }
   };
 
-  /* ================= DELETE ================= */
+  /** ================= DELETE ================= */
   const handleDelete = async (id: number) => {
     const res = await Swal.fire({
       title: 'Are you sure?',
@@ -194,7 +166,6 @@ const Galleries: React.FC = () => {
       showCancelButton: true,
       confirmButtonColor: '#dc2626',
     });
-
     if (!res.isConfirmed) return;
 
     await api.delete(`/galleries/${id}`);
@@ -210,42 +181,41 @@ const Galleries: React.FC = () => {
     });
   };
 
-  /* ================= COLUMNS ================= */
- const columns = [
-  {
-    key: 'cover' as keyof GalleryRow,
-    header: 'Cover',
-    render: (row: GalleryRow) => (
-      <img
-        src={row.cover}
-        alt={row.title}
-        className="h-12 w-12 rounded object-cover border"
-      />
-    ),
-  },
-  { key: 'title' as keyof GalleryRow, header: t.title },
-  { key: 'category' as keyof GalleryRow, header: 'Category' },
-  {
-    key: 'images' as keyof GalleryRow,
-    header: 'Gallery',
-    render: (row: GalleryRow) => (
-      <div className="flex items-center gap-2">
-        {row.images?.slice(0, 3).map((img, i) => (
-          <img
-            key={i}
-            src={img}
-            alt=""
-            className="h-8 w-8 rounded object-cover border"
-          />
-        ))}
-        {row.images.length > 3 && (
-          <Badge variant="secondary">+{row.images.length - 3}</Badge>
-        )}
-      </div>
-    ),
-  },
-];
-
+  /** ================= COLUMNS ================= */
+  const columns = [
+    {
+      key: 'cover' as keyof GalleryRow,
+      header: 'Cover',
+      render: (row: GalleryRow) => (
+        <img
+          src={row.cover}
+          alt={row.title}
+          className="h-12 w-12 rounded object-cover border"
+        />
+      ),
+    },
+    { key: 'title' as keyof GalleryRow, header: t.title },
+    { key: 'category' as keyof GalleryRow, header: 'Category' },
+    {
+      key: 'images' as keyof GalleryRow,
+      header: 'Gallery',
+      render: (row: GalleryRow) => (
+        <div className="flex items-center gap-2">
+          {row.images?.slice(0, 3).map((img, i) => (
+            <img
+              key={i}
+              src={img}
+              alt=""
+              className="h-8 w-8 rounded object-cover border"
+            />
+          ))}
+          {row.images.length > 3 && (
+            <Badge variant="secondary">+{row.images.length - 3}</Badge>
+          )}
+        </div>
+      ),
+    },
+  ];
 
   return (
     <div className="space-y-6">
@@ -265,11 +235,9 @@ const Galleries: React.FC = () => {
 
       {/* ================= MODAL ================= */}
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="max-w-2xl">
+        <DialogContent className="max-w-2xl w-full sm:w-11/12 md:w-3/4 overflow-y-auto">
           <DialogHeader>
-            <DialogTitle>
-              {editingId ? 'Edit Gallery' : 'Add Gallery'}
-            </DialogTitle>
+            <DialogTitle>{editingId ? 'Edit Gallery' : 'Add Gallery'}</DialogTitle>
           </DialogHeader>
 
           <div className="space-y-4">
@@ -277,37 +245,44 @@ const Galleries: React.FC = () => {
               <Label>Category</Label>
               <Input
                 value={form.category}
-                onChange={(e) =>
-                  setForm({ ...form, category: e.target.value })
-                }
+                onChange={(e) => setForm({ ...form, category: e.target.value })}
               />
             </div>
 
             <div>
               <Label>Cover Image</Label>
+              {form.existingCover && !form.cover && (
+                <img
+                  src={form.existingCover}
+                  alt="Existing Cover"
+                  className="mb-2 h-20 w-20 object-cover rounded border"
+                />
+              )}
               <Input
                 type="file"
                 accept="image/*"
-                onChange={(e) =>
-                  setForm({
-                    ...form,
-                    cover: e.target.files?.[0] || null,
-                  })
-                }
+                onChange={(e) => setForm({ ...form, cover: e.target.files?.[0] || null })}
               />
             </div>
 
             <div>
               <Label>Gallery Images</Label>
+              <div className="flex flex-wrap gap-2 mb-2">
+                {form.existingImages?.map((img, i) => (
+                  <img
+                    key={i}
+                    src={img}
+                    alt=""
+                    className="h-16 w-16 object-cover rounded border"
+                  />
+                ))}
+              </div>
               <Input
                 type="file"
                 multiple
                 accept="image/*"
                 onChange={(e) =>
-                  setForm({
-                    ...form,
-                    images: Array.from(e.target.files || []),
-                  })
+                  setForm({ ...form, images: Array.from(e.target.files || []) })
                 }
               />
             </div>
@@ -320,18 +295,12 @@ const Galleries: React.FC = () => {
               </TabsList>
 
               {LANGS.map((lang) => (
-                <TabsContent
-                  key={lang}
-                  value={lang}
-                  className="space-y-3"
-                >
+                <TabsContent key={lang} value={lang} className="space-y-3">
                   <div>
                     <Label>Title</Label>
                     <Input
                       value={form[lang].title}
-                      onChange={(e) =>
-                        updateLangField(lang, 'title', e.target.value)
-                      }
+                      onChange={(e) => updateLangField(lang, 'title', e.target.value)}
                     />
                   </div>
 
@@ -340,13 +309,7 @@ const Galleries: React.FC = () => {
                     <Textarea
                       rows={3}
                       value={form[lang].description}
-                      onChange={(e) =>
-                        updateLangField(
-                          lang,
-                          'description',
-                          e.target.value
-                        )
-                      }
+                      onChange={(e) => updateLangField(lang, 'description', e.target.value)}
                     />
                   </div>
                 </TabsContent>

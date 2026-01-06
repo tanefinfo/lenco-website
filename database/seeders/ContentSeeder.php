@@ -12,7 +12,7 @@ class ContentSeeder extends Seeder
 {
     public function run()
     {
-        // --- HERO SECTION ---
+        // --- HERO SECTION
        // --- HERO SECTION ---
 $heroData = [
     'en' => ['title' => "Lencho Fikiru’s Work", 'subtitle' => "Films, Oromo music videos, and trailers—crafted with cultural respect and international standards."],
