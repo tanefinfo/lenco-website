@@ -277,7 +277,6 @@ const CATEGORY_MAP: Record<string, string> = {
               {editingId ? 'Edit Gallery' : 'Add Gallery'}
             </DialogTitle>
           </DialogHeader>
-
         <div>
   <Label>Category</Label>
   <select
