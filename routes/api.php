@@ -138,10 +138,10 @@ Route::prefix('admin')->group(function () {
 });
 
 
+Route::get('/contents', [ContentController::class, 'index']);
+Route::get('/contents/{type}/{slug}', [ContentController::class, 'show']);
 Route::prefix('admin')->group(function () {
-    Route::get('/contents', [ContentController::class, 'index']); // list all
-    Route::post('/contents', [ContentController::class, 'store']); // create
-    Route::get('/contents/{id}', [ContentController::class, 'show']); // single
-    Route::put('/contents/{id}', [ContentController::class, 'update']); // update
-    Route::delete('/contents/{id}', [ContentController::class, 'destroy']); // delete
+    Route::post('/contents', [ContentController::class, 'store']);
+    Route::put('/contents/{id}', [ContentController::class, 'update']);
+    Route::delete('/contents/{id}', [ContentController::class, 'destroy']);
 });

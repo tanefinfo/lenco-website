@@ -161,4 +161,29 @@ class GalleryController extends Controller
             'message' => 'Gallery deleted successfully',
         ]);
     }
+
+    public function show($id)
+{
+    $g = Gallery::findOrFail($id);
+
+    return response()->json([
+        'id' => $g->id,
+        'category' => $g->category,
+
+        'title_en' => $g->title_en,
+        'title_am' => $g->title_am,
+        'title_or' => $g->title_or,
+
+        'description_en' => $g->description_en,
+        'description_am' => $g->description_am,
+        'description_or' => $g->description_or,
+
+        'cover' => asset('storage/' . $g->cover),
+        'images' => collect($g->images ?? [])
+            ->map(fn ($img) => asset('storage/' . $img)),
+    ]);
 }
+
+}
+
+

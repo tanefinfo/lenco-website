@@ -9,16 +9,26 @@ return new class extends Migration {
     {
         Schema::create('festivals', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+
+            // Multilingual support
+            $table->string('title_en');
+            $table->string('title_am');
+            $table->string('title_or');
+
+            $table->text('description_en')->nullable();
+            $table->text('description_am')->nullable();
+            $table->text('description_or')->nullable();
+
             $table->string('location')->nullable();
-            $table->string('year')->nullable();
-            $table->string('dates')->nullable();
-            $table->string('image')->nullable();
+
             $table->string('type'); // upcoming | past
+            $table->date('date');   // Single date column
+            $table->string('image'); // Main image
+            $table->json('gallery')->nullable(); // Optional gallery
+
             $table->string('spotlight')->nullable();
-            $table->text('description')->nullable();
             $table->string('link')->nullable();
-            $table->string('language')->default('en'); // 🌍 language support
+
             $table->timestamps();
         });
     }

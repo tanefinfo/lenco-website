@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import api from '@/lib/api';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { PageHeader } from '@/components/admin/PageHeader';
 import { DataTable } from '@/components/admin/DataTable';
@@ -7,32 +8,39 @@ import { Badge } from '@/components/ui/badge';
 
 interface Festival {
   id: number;
-  name: string;
-  location: string;
+  title: string;
+  description?: string | null;
+  location?: string | null;
+  type: 'upcoming' | 'past';
   date: string;
-  status: string;
+  image: string;
+  gallery?: string[] | null;
+  spotlight?: string | null;
+  link?: string | null;
 }
 
 const Festivals: React.FC = () => {
   const { t } = useLanguage();
+  const [festivals, setFestivals] = useState<Festival[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const [festivals] = useState<Festival[]>([
-    { id: 1, name: 'Meskel Festival', location: 'Addis Ababa', date: '2024-09-27', status: 'Upcoming' },
-    { id: 2, name: 'Irreecha Festival', location: 'Bishoftu', date: '2024-10-05', status: 'Upcoming' },
-    { id: 3, name: 'Timkat Festival', location: 'Gondar', date: '2024-01-19', status: 'Completed' },
-    { id: 4, name: 'Genna Festival', location: 'Lalibela', date: '2024-01-07', status: 'Completed' },
-  ]);
+  useEffect(() => {
+    api
+      .get('/festivals', { params: { lang: 'en' } })
+      .then(res => setFestivals(res.data))
+      .finally(() => setLoading(false));
+  }, []);
 
   const columns = [
-    { key: 'name' as keyof Festival, header: t.name },
+    { key: 'title' as keyof Festival, header: t.name },
     { key: 'location' as keyof Festival, header: 'Location' },
     { key: 'date' as keyof Festival, header: t.date },
     {
-      key: 'status' as keyof Festival,
+      key: 'type' as keyof Festival,
       header: t.status,
       render: (item: Festival) => (
-        <Badge variant={item.status === 'Upcoming' ? 'default' : 'secondary'}>
-          {item.status}
+        <Badge variant={item.type === 'upcoming' ? 'default' : 'secondary'}>
+          {item.type === 'upcoming' ? 'Upcoming' : 'Past'}
         </Badge>
       ),
     },
@@ -48,6 +56,7 @@ const Festivals: React.FC = () => {
       />
 
       <DataTable
+        loading={loading}
         data={festivals}
         columns={columns}
         onView={(item) => console.log('View', item)}
