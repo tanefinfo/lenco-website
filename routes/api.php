@@ -5,7 +5,6 @@ use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AboutContentController;
-use App\Http\Controllers\ContentController;
 use App\Http\Controllers\AwardController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Api\GalleryController;
@@ -15,6 +14,11 @@ use App\Http\Controllers\Api\ServiceController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\TalentController;
 use App\Http\Controllers\Api\TalentApplicationController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Api\ContentController;
+
+
 
 Route::post('/login', [AuthController::class, 'login']);
 
@@ -58,13 +62,7 @@ Route::prefix('about')->group(function () {
     Route::post('/bulk', [AboutContentController::class, 'bulkStore']);
 });
 
-Route::prefix('contents')->group(function () {
-    Route::get('/', [ContentController::class, 'index']);
-    Route::get('{type}/{slug}', [ContentController::class, 'show']);
-    Route::post('/', [ContentController::class, 'store']);
-    Route::put('{id}', [ContentController::class, 'update']);
-    Route::delete('{id}', [ContentController::class, 'destroy']);
-});
+
 
 Route::prefix('awards')->group(function () {
     Route::get('/', [AwardController::class, 'index']);
@@ -137,4 +135,13 @@ Route::prefix('admin')->group(function () {
     Route::get('talent-applications', [TalentApplicationController::class, 'index']);
     Route::get('talent-applications/{id}', [TalentApplicationController::class, 'show']);
     Route::put('talent-applications/{id}/review', [TalentApplicationController::class, 'review']);
+});
+
+
+Route::prefix('admin')->group(function () {
+    Route::get('/contents', [ContentController::class, 'index']); // list all
+    Route::post('/contents', [ContentController::class, 'store']); // create
+    Route::get('/contents/{id}', [ContentController::class, 'show']); // single
+    Route::put('/contents/{id}', [ContentController::class, 'update']); // update
+    Route::delete('/contents/{id}', [ContentController::class, 'destroy']); // delete
 });

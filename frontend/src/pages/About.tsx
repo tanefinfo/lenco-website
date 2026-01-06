@@ -1,135 +1,181 @@
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 import { Layout } from "@/components/layout";
 import { HeroSection, SectionHeader } from "@/components/shared";
-import api from "@/api";
+import { useAwards } from "@/hooks/useContent";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { ArrowUpRight } from "lucide-react";
+import type { Award } from "@/types/content";
 
-export default function About() {
-    const [about, setAbout] = useState<any>(null);
-    const [loading, setLoading] = useState(true);
+export default function AwardsFrontend() {
+  // defaults to English on backend
+  const { data, isLoading, error } = useAwards();
 
-    useEffect(() => {
-        const fetchAbout = async () => {
-            try {
-                const res = await api.get("/about");
-                setAbout(res.data);
-                console.log(about);
-            } catch (error) {
-                console.error("Failed to fetch about content:", error);
-            } finally {
-                setLoading(false);
-            }
-        };
+  const [selected, setSelected] = useState<Award | null>(null);
+  const [open, setOpen] = useState(false);
 
-        fetchAbout();
-    }, []);
+  const sorted = useMemo(() => {
+    if (!data) return [];
+    return [...data].sort((a, b) => b.year - a.year);
+  }, [data]);
 
-    if (loading) {
-        return <div className="text-center py-20">Loading...</div>;
-    }
+  const openAward = (award: Award) => {
+    setSelected(award);
+    setOpen(true);
+  };
 
-    if (!about) {
-        return <div className="text-center py-20">No content found.</div>;
-    }
+  return (
+    <Layout>
+      <HeroSection
+        title="Awards"
+        subtitle="Recognitions and honors celebrating craft and leadership."
+      />
 
-    return (
-        <Layout>
-            {/* Hero */}
-            <HeroSection
-                title={about.hero_title}
-                subtitle={about.hero_subtitle}
-            />
+      <section className="section-padding">
+        <div className="container-custom">
+          <SectionHeader title="Highlights" />
 
-            {/* Portrait + Bio */}
-            <section className="section-padding pt-10">
-                <div className="container-custom grid gap-8 md:grid-cols-2 items-center">
-                    <div className="rounded-2xl overflow-hidden border">
-                        <img
-                            src={about.portrait_url}
-                            alt={about.full_name}
-                            className="w-full h-full object-cover"
-                        />
-                    </div>
+          {/* Loading */}
+          {isLoading && (
+            <p className="text-muted-foreground">Loading awards...</p>
+          )}
 
-                    <div className="space-y-4">
-                        <h2 className="text-2xl font-semibold">
-                            {about.full_name}
-                        </h2>
-                        <p className="text-muted-foreground">
-                            {about.role}
+          {/* Error */}
+          {error && (
+            <p className="text-destructive">
+              Unable to load awards.
+            </p>
+          )}
+
+          {/* Empty */}
+          {!isLoading && !error && sorted.length === 0 && (
+            <p className="text-muted-foreground">
+              No awards available.
+            </p>
+          )}
+
+          {/* Awards Grid */}
+          {!isLoading && !error && sorted.length > 0 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {sorted.map((a) => (
+                <button
+                  key={a.id}
+                  onClick={() => openAward(a)}
+                  className="group text-left bg-card border border-border rounded-2xl overflow-hidden shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+                >
+                  <div className="relative aspect-[4/3]">
+                    <img
+                      src={a.image}
+                      alt={a.title}
+                      loading="lazy"
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+
+                    <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-white">
+                      <div>
+                        <p className="text-xs uppercase tracking-wide text-white/80">
+                          {a.year} · {a.category}
                         </p>
-                        <p className="text-muted-foreground">
-                            {about.bio_long_1}
-                        </p>
-                        <p className="text-muted-foreground">
-                            {about.bio_long_2}
-                        </p>
-                    </div>
-                </div>
-            </section>
-
-            {/* Background & Work */}
-            <section className="section-padding">
-                <div className="container-custom grid md:grid-cols-2 gap-8">
-                    <div className="bg-card p-6 rounded-lg border">
-                        <h3 className="text-xl font-semibold">
-                            {about.background_title}
+                        <h3 className="text-lg font-semibold">
+                          {a.title}
                         </h3>
-                        <p className="mt-3 text-muted-foreground">
-                            {about.background_p1}
-                        </p>
-                        <p className="mt-3 text-muted-foreground">
-                            {about.background_p2}
-                        </p>
-                    </div>
+                      </div>
 
-                    <div className="bg-card p-6 rounded-lg border">
-                        <h3 className="text-xl font-semibold">
-                            {about.oromo_work_title}
-                        </h3>
-                        <p className="mt-3 text-muted-foreground">
-                            {about.oromo_work_p1}
-                        </p>
-                        <p className="mt-3 text-muted-foreground">
-                            {about.oromo_work_p2}
-                        </p>
+                      <span className="inline-flex items-center gap-1 text-xs font-semibold bg-white/15 px-2 py-1 rounded-full backdrop-blur">
+                        View <ArrowUpRight className="h-3 w-3" />
+                      </span>
                     </div>
+                  </div>
+
+                  <div className="p-4 space-y-1">
+                    {a.issuer && (
+                      <p className="text-sm font-semibold">
+                        {a.issuer}
+                      </p>
+                    )}
+
+                    {a.project && (
+                      <p className="text-sm text-muted-foreground">
+                        Project: {a.project}
+                      </p>
+                    )}
+
+                    {a.placement && (
+                      <p className="text-xs text-primary font-semibold">
+                        {a.placement}
+                      </p>
+                    )}
+
+                    {a.description && (
+                      <p className="text-sm text-muted-foreground line-clamp-2">
+                        {a.description}
+                      </p>
+                    )}
+                  </div>
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Dialog */}
+      <Dialog
+        open={open}
+        onOpenChange={(isOpen) => {
+          setOpen(isOpen);
+          if (!isOpen) setSelected(null);
+        }}
+      >
+        <DialogContent className="max-w-3xl">
+          {selected && (
+            <>
+              <DialogHeader>
+                <DialogTitle>{selected.title}</DialogTitle>
+                <DialogDescription>
+                  {selected.year} · {selected.category}
+                  {selected.placement && ` · ${selected.placement}`}
+                </DialogDescription>
+              </DialogHeader>
+
+              <div className="grid gap-4 md:grid-cols-2 items-start">
+                <div className="overflow-hidden rounded-lg border">
+                  <img
+                    src={selected.image}
+                    alt={selected.title}
+                    loading="lazy"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
-            </section>
 
-            {/* Vision */}
-            <section className="section-padding">
-                <div className="container-custom bg-card p-6 rounded-lg border">
-                    <h3 className="text-xl font-semibold">
-                        {about.vision_title}
-                    </h3>
-                    <p className="mt-3 text-muted-foreground">
-                        {about.vision_description}
+                <div className="space-y-3 text-sm">
+                  {selected.issuer && (
+                    <p className="font-semibold">
+                      Issuer: {selected.issuer}
                     </p>
-                </div>
-            </section>
+                  )}
 
-            {/* Philosophy */}
-            {about.philosophies?.length > 0 && (
-                <section className="section-padding bg-card">
-                    <div className="container-custom">
-                        <SectionHeader title="Philosophy" />
-                        <div className="grid md:grid-cols-3 gap-6">
-                            {about.philosophies.map(
-                                (item: any, index: number) => (
-                                    <div
-                                        key={index}
-                                        className="p-6 border rounded-lg bg-background"
-                                    >
-                                        <p className="text-muted-foreground">
-                                            {item.text}
-                                        </p>
-                                    </div>
-                                )
-                            )}
-                        </div>
-                    </div>
-                </section>
-            )}
-        </Layout>
-    );
+                  {selected.project && (
+                    <p>Project: {selected.project}</p>
+                  )}
+
+                  {selected.description && (
+                    <p className="text-muted-foreground">
+                      {selected.description}
+                    </p>
+                  )}
+                </div>
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
+    </Layout>
+  );
 }

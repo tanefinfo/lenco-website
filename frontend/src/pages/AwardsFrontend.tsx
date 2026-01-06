@@ -12,7 +12,7 @@ import {
 import { ArrowUpRight } from "lucide-react";
 import type { Award } from "@/types/content";
 
-export default function Awards() {
+export default function AwardsFrontend() {
   const { data = [], isLoading, error } = useAwards();
   const [selected, setSelected] = useState<Award | null>(null);
   const [open, setOpen] = useState(false);

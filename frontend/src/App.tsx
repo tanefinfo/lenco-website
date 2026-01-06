@@ -17,8 +17,9 @@ import NotFound from "./pages/NotFound";
 import ProjectDetail from "./pages/ProjectDetail";
 import ProductDetail from "./pages/ProductDetail";
 import Festivals from "./pages/Festivals";
-import Awards from "./pages/Awards";
+import Awards from "./pages/AwardsFrontend";
 import EventDetail from "./pages/EventDetail";
+import AwardsFrontend from "./pages/AwardsFrontend";
 
 const queryClient = new QueryClient();
 
@@ -39,7 +40,7 @@ const App = () => (
           <Route path="/studio" element={<Studio />} />
           <Route path="/galleries" element={<Galleries />} />
           <Route path="/festivals" element={<Festivals />} />
-          <Route path="/awards" element={<Awards />} />
+          <Route path="/awards" element={<AwardsFrontend />} />
           <Route path="/events" element={<Events />} />
           <Route path="/events/:id" element={<EventDetail />} />
           <Route path="/contact" element={<Contact />} />

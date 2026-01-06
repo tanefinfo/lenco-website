@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Outlet, Navigate } from 'react-router-dom';
 import { AdminSidebar } from './AdminSidebar';
-import { AdminHeader } from './AdminHeader';
+// import { AdminHeader } from './AdminHeader';
 import { cn } from '@/lib/utils';
 import { Loader2 } from 'lucide-react';
+import { AdminHeader } from './AdminHeader';
 
 export const AdminLayout: React.FC = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
