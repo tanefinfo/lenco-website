@@ -10,6 +10,7 @@ import Works from "./pages/Works";
 import Products from "./pages/Products";
 import Studio from "./pages/Studio";
 import Galleries from "./pages/Galleries";
+
 import Events from "./pages/Events";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
