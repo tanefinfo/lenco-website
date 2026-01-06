@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+// use AboutContent;
 use App\Http\Controllers\Controller;
 use App\Models\AboutContent;
 use Illuminate\Http\Request;
@@ -123,7 +124,7 @@ class AboutContentController extends Controller
             ? 'image|max:2048'
             : 'sometimes|image|max:2048',
 
-        'portrait_url' => 'sometimes|url',
+        // 'portrait_url' => 'sometimes|url',
 
         'full_name' => "$rule|string",
         'role' => "$rule|string",
