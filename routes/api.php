@@ -33,10 +33,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::middleware('auth:sanctum')
     ->get('/dashboard', fn () => response()->json(['status' => 'ok']));
 
-    Route::middleware('auth:sanctum')->get('/users', [UserController::class, 'index']);
-    Route::middleware('auth:sanctum')->post('/users', [UserController::class, 'store']);
-    Route::middleware('auth:sanctum')->put('/users/{user}', [UserController::class, 'update']);
-    Route::middleware('auth:sanctum')->delete('/users/{user}', [UserController::class, 'destroy']);
+    // Route::middleware('auth:sanctum')->get('/users', [UserController::class, 'index']);
+    // Route::middleware('auth:sanctum')->post('/users', [UserController::class, 'store']);
+    // Route::middleware('auth:sanctum')->put('/users/{user}', [UserController::class, 'update']);
+    // Route::middleware('auth:sanctum')->delete('/users/{user}', [UserController::class, 'destroy']);
 
     // Roles
     Route::middleware('auth:sanctum')->get('/roles', [RoleController::class, 'index']);
@@ -44,6 +44,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::middleware('auth:sanctum')->put('/roles/{role}', [RoleController::class, 'update']);
     Route::middleware('auth:sanctum')->get('/permissions', [RoleController::class, 'permissions']);
 });
+
+Route::get('/users', [UserController::class, 'index']);
+Route::post('/users', [UserController::class, 'store']);
+Route::put('/users/{user}', [UserController::class, 'update']);
+Route::delete('/users/{user}', [UserController::class, 'destroy']);
 
 Route::prefix('about')->group(function () {
     // READ: Get content by language, e.g., /api/about?lang=en
@@ -124,24 +129,25 @@ Route::prefix('products')->group(function () {
 
 Route::prefix('talents')->group(function () {
     Route::get('/', [TalentController::class, 'index']);
-    Route::get('{id}', [TalentController::class, 'show']);
+    Route::get('/{id}', [TalentController::class, 'show']);
     Route::post('/', [TalentController::class, 'store']);
-    Route::put('{id}', [TalentController::class, 'update']);
-    Route::delete('{id}', [TalentController::class, 'destroy']);
-
-    Route::post('{id}/apply', [TalentApplicationController::class, 'store']);
+    Route::put('/{id}', [TalentController::class, 'update']);
+    Route::delete('/{id}', [TalentController::class, 'destroy']);
 });
-Route::prefix('admin')->group(function () {
-    Route::get('talent-applications', [TalentApplicationController::class, 'index']);
-    Route::get('talent-applications/{id}', [TalentApplicationController::class, 'show']);
-    Route::put('talent-applications/{id}/review', [TalentApplicationController::class, 'review']);
-});
+Route::get('/talent-applications', [TalentApplicationController::class, 'index']);
+Route::get('/talent-applications/{id}', [TalentApplicationController::class, 'show']);
+
+Route::post(
+    '/talents/{talent}/apply',
+    [TalentApplicationController::class, 'store']
+);
+
+Route::put('/talent-applications/{id}', [TalentApplicationController::class, 'update']);
+Route::delete('/talent-applications/{id}', [TalentApplicationController::class, 'destroy']);
 
 
-Route::get('/contents', [ContentController::class, 'index']);
-Route::get('/contents/{type}/{slug}', [ContentController::class, 'show']);
-Route::prefix('admin')->group(function () {
-    Route::post('/contents', [ContentController::class, 'store']);
-    Route::put('/contents/{id}', [ContentController::class, 'update']);
-    Route::delete('/contents/{id}', [ContentController::class, 'destroy']);
-});
+ Route::get('/admin/works', [ContentController::class, 'works']);
+    Route::get('/admin/works', [ContentController::class, 'works']);
+Route::post('/admin/works', [ContentController::class, 'storeWork']);
+Route::put('/admin/works/{id}', [ContentController::class, 'updateWork']);
+Route::delete('/admin/works/{id}', [ContentController::class, 'destroyWork']);

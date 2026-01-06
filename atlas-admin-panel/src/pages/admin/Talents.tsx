@@ -1,45 +1,104 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import api from '@/lib/api';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { PageHeader } from '@/components/admin/PageHeader';
 import { DataTable } from '@/components/admin/DataTable';
 import { Sparkles } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+import { toast } from 'sonner';
 
-interface Talent {
+interface TalentApplication {
   id: number;
-  name: string;
-  skill: string;
-  experience: string;
-  status: string;
-  date: string;
+  full_name: string;
+  email: string;
+  location?: string;
+  status: 'pending' | 'approved' | 'rejected';
+  created_at: string;
+  talent?: {
+    id: number;
+    title_en: string;
+    title_am: string;
+    title_or: string;
+  };
 }
 
 const Talents: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
+  const [loading, setLoading] = useState(false);
+  const [applications, setApplications] = useState<TalentApplication[]>([]);
 
-  const [talents] = useState<Talent[]>([
-    { id: 1, name: 'Abebe Kebede', skill: 'Traditional Dance', experience: '10 years', status: 'Approved', date: '2024-01-28' },
-    { id: 2, name: 'Tigist Haile', skill: 'Music & Vocals', experience: '8 years', status: 'Pending', date: '2024-01-27' },
-    { id: 3, name: 'Dawit Mekonnen', skill: 'Visual Arts', experience: '5 years', status: 'Approved', date: '2024-01-25' },
-    { id: 4, name: 'Hana Girma', skill: 'Photography', experience: '6 years', status: 'Under Review', date: '2024-01-24' },
-  ]);
+  const fetchApplications = async () => {
+    try {
+      setLoading(true);
+      const res = await api.get('/talent-applications');
+      setApplications(res.data);
+    } catch (err) {
+      toast.error('Failed to load applications');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchApplications();
+  }, []);
+
+  const updateStatus = async (id: number, status: TalentApplication['status']) => {
+    try {
+      await api.put(`/talent-applications/${id}`, { status });
+      toast.success('Application updated');
+      fetchApplications();
+    } catch {
+      toast.error('Failed to update status');
+    }
+  };
+
+  const deleteApplication = async (id: number) => {
+    if (!confirm('Delete this application?')) return;
+
+    try {
+      await api.delete(`/talent-applications/${id}`);
+      toast.success('Application deleted');
+      fetchApplications();
+    } catch {
+      toast.error('Failed to delete');
+    }
+  };
 
   const columns = [
-    { key: 'name' as keyof Talent, header: t.name },
-    { key: 'skill' as keyof Talent, header: 'Skill' },
-    { key: 'experience' as keyof Talent, header: 'Experience' },
-    { key: 'date' as keyof Talent, header: 'Applied' },
     {
-      key: 'status' as keyof Talent,
+      key: 'full_name' as keyof TalentApplication,
+      header: t.name,
+    },
+    {
+      header: 'Talent',
+      render: (row: TalentApplication) =>
+        row.talent ? row.talent[`title_${lang}` as keyof typeof row.talent] : '—',
+    },
+    {
+      key: 'email' as keyof TalentApplication,
+      header: 'Email',
+    },
+    {
+      key: 'created_at' as keyof TalentApplication,
+      header: 'Applied',
+      render: (row: TalentApplication) =>
+        new Date(row.created_at).toLocaleDateString(),
+    },
+    {
+      key: 'status' as keyof TalentApplication,
       header: t.status,
-      render: (item: Talent) => (
+      render: (row: TalentApplication) => (
         <Badge
           variant={
-            item.status === 'Approved' ? 'default' :
-            item.status === 'Pending' ? 'secondary' : 'outline'
+            row.status === 'approved'
+              ? 'default'
+              : row.status === 'pending'
+              ? 'secondary'
+              : 'destructive'
           }
         >
-          {item.status}
+          {row.status}
         </Badge>
       ),
     },
@@ -49,17 +108,27 @@ const Talents: React.FC = () => {
     <div className="space-y-6">
       <PageHeader
         title={t.talents}
-        description="Manage talent applications"
+        description="Review and manage talent applications"
         icon={Sparkles}
-        onAdd={() => console.log('Add talent')}
       />
 
       <DataTable
-        data={talents}
+        loading={loading}
+        data={applications}
         columns={columns}
-        onView={(item) => console.log('View', item)}
-        onEdit={(item) => console.log('Edit', item)}
-        onDelete={(item) => console.log('Delete', item)}
+        onView={(row) => console.log('VIEW', row)}
+        onEdit={(row) => updateStatus(row.id, 'approved')}
+        onDelete={(row) => deleteApplication(row.id)}
+        extraActions={[
+          {
+            label: 'Approve',
+            onClick: (row) => updateStatus(row.id, 'approved'),
+          },
+          {
+            label: 'Reject',
+            onClick: (row) => updateStatus(row.id, 'rejected'),
+          },
+        ]}
       />
     </div>
   );
