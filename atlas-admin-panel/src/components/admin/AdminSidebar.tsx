@@ -41,14 +41,14 @@ const navItems: NavItem[] = [
   { key: 'services', path: '/admin/services', icon: Wrench },
   { key: 'contact', path: '/admin/contact', icon: Mail },
   { key: 'products', path: '/admin/products', icon: Package },
-  { key: 'awards', path: '/admin/awards', icon: Sparkles }, // <-- added
+  { key: 'awards-admin', path: '/admin/awards-admin', icon: Sparkles },
 ];
-
 
 const secondaryItems: NavItem[] = [
   { key: 'talents', path: '/admin/talents', icon: Sparkles },
   { key: 'users', path: '/admin/users', icon: Users },
   { key: 'settings', path: '/admin/settings', icon: Settings },
+  { key: 'talents-admin', path: '/admin/talents-admin', icon: Sparkles }, // New route added
 ];
 
 export const AdminSidebar: React.FC<AdminSidebarProps> = ({ collapsed, onToggle }) => {

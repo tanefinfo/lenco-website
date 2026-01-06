@@ -5,19 +5,25 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
     // GET /api/products
-    public function index(Request $request)
+    public function index()
     {
-        return Product::latest()->get();
+        return Product::latest()->get()->map(function ($p) {
+            $p->image = $p->image ? asset($p->image) : null;
+            return $p;
+        });
     }
 
     // GET /api/products/{id}
     public function show($id)
     {
-        return Product::findOrFail($id);
+        $product = Product::findOrFail($id);
+        $product->image = $product->image ? asset($product->image) : null;
+        return $product;
     }
 
     // POST /api/products
@@ -35,11 +41,20 @@ class ProductController extends Controller
             'full_description_or' => 'nullable|string',
             'category' => 'required|string',
             'price' => 'nullable|string',
-            'image' => 'required|string',
-            'gallery' => 'nullable|array'
+            'image' => 'nullable|image|max:2048',
+            'gallery' => 'nullable|array',
         ]);
 
-        return Product::create($data);
+        // Store image
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('products', 'public');
+            $data['image'] = 'storage/' . $path;
+        }
+
+        $product = Product::create($data);
+        $product->image = $product->image ? asset($product->image) : null;
+
+        return response()->json($product, 201);
     }
 
     // PUT /api/products/{id}
@@ -47,7 +62,27 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
 
-        $product->update($request->all());
+        $data = $request->validate([
+            'name_en' => 'required|string',
+            'name_am' => 'nullable|string',
+            'name_or' => 'nullable|string',
+            'category' => 'required|string',
+            'price' => 'nullable|string',
+            'image' => 'nullable|image|max:2048',
+        ]);
+
+        // Replace image if new one uploaded
+        if ($request->hasFile('image')) {
+            if ($product->image && Storage::disk('public')->exists(str_replace('storage/', '', $product->image))) {
+                Storage::disk('public')->delete(str_replace('storage/', '', $product->image));
+            }
+
+            $path = $request->file('image')->store('products', 'public');
+            $data['image'] = 'storage/' . $path;
+        }
+
+        $product->update($data);
+        $product->image = $product->image ? asset($product->image) : null;
 
         return $product;
     }
@@ -55,7 +90,13 @@ class ProductController extends Controller
     // DELETE /api/products/{id}
     public function destroy($id)
     {
-        Product::findOrFail($id)->delete();
+        $product = Product::findOrFail($id);
+
+        if ($product->image) {
+            Storage::disk('public')->delete(str_replace('storage/', '', $product->image));
+        }
+
+        $product->delete();
         return response()->json(['message' => 'Deleted']);
     }
 }

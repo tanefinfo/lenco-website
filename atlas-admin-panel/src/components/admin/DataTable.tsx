@@ -14,13 +14,13 @@ import { useLanguage } from '@/contexts/LanguageContext';
 
 interface Column<T> {
   key: keyof T | string;
-  header: string;
+  header?: React.ReactNode; // ✅ SAFE
   render?: (item: T) => React.ReactNode;
   className?: string;
 }
 
-interface DataTableProps<T> {
-  data: T[];
+interface DataTableProps<T extends { id: number | string }> {
+  data?: T[];
   columns: Column<T>[];
   isLoading?: boolean;
   onView?: (item: T) => void;
@@ -29,7 +29,7 @@ interface DataTableProps<T> {
 }
 
 export function DataTable<T extends { id: number | string }>({
-  data,
+  data = [],
   columns,
   isLoading,
   onView,
@@ -46,92 +46,59 @@ export function DataTable<T extends { id: number | string }>({
     );
   }
 
-  if (data.length === 0) {
+  if (!data.length) {
     return (
-      <div className="text-center py-12">
-        <p className="text-muted-foreground">{t.noData}</p>
+      <div className="text-center py-12 text-muted-foreground">
+        {t?.noData ?? 'No data'}
       </div>
     );
   }
 
-  const getValue = (item: T, key: keyof T | string): any => {
+  const getValue = (item: T, key: keyof T | string) => {
     if (typeof key === 'string' && key.includes('.')) {
-      const keys = key.split('.');
-      let value: any = item;
-      for (const k of keys) {
-        value = value?.[k];
-      }
-      return value;
+      return key.split('.').reduce<any>((acc, k) => acc?.[k], item);
     }
     return item[key as keyof T];
   };
 
   return (
-    <div className="rounded-lg border border-border overflow-hidden">
+    <div className="rounded-lg border overflow-hidden">
       <Table>
         <TableHeader>
-          <TableRow className="bg-muted/50 hover:bg-muted/50">
-            {columns.map((column) => (
-              <TableHead
-                key={String(column.key)}
-                className={cn('font-semibold text-foreground', column.className)}
-              >
-                {column.header}
+          <TableRow>
+            {columns.map(col => (
+              <TableHead key={String(col.key)}>
+                {col.header ?? ''}
               </TableHead>
             ))}
             {(onView || onEdit || onDelete) && (
-              <TableHead className="text-right font-semibold text-foreground">
-                {t.actions}
+              <TableHead className="text-right">
+                {t?.actions ?? 'Actions'}
               </TableHead>
             )}
           </TableRow>
         </TableHeader>
+
         <TableBody>
-          {data.map((item) => (
-            <TableRow
-              key={item.id}
-              className="hover:bg-muted/30 transition-colors"
-            >
-              {columns.map((column) => (
-                <TableCell
-                  key={`${item.id}-${String(column.key)}`}
-                  className={column.className}
-                >
-                  {column.render
-                    ? column.render(item)
-                    : String(getValue(item, column.key) ?? '-')}
+          {data.map(item => (
+            <TableRow key={item.id}>
+              {columns.map(col => (
+                <TableCell key={`${item.id}-${String(col.key)}`}>
+                  {col.render
+                    ? col.render(item)
+                    : String(getValue(item, col.key) ?? '—')}
                 </TableCell>
               ))}
               {(onView || onEdit || onDelete) && (
                 <TableCell className="text-right">
-                  <div className="flex items-center justify-end gap-1">
-                    {onView && (
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => onView(item)}
-                        className="h-8 w-8 text-muted-foreground hover:text-foreground"
-                      >
-                        <Eye className="w-4 h-4" />
-                      </Button>
-                    )}
+                  <div className="flex justify-end gap-1">
                     {onEdit && (
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => onEdit(item)}
-                        className="h-8 w-8 text-muted-foreground hover:text-primary"
-                      >
+                      <Button size="icon" variant="ghost" onClick={() => onEdit(item)}>
                         <Edit className="w-4 h-4" />
                       </Button>
                     )}
                     {onDelete && (
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => onDelete(item)}
-                        className="h-8 w-8 text-muted-foreground hover:text-destructive"
-                      >
+                      <Button size="icon" variant="ghost" onClick={() => onDelete(item)}>
                         <Trash2 className="w-4 h-4" />
                       </Button>
                     )}

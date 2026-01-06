@@ -19,7 +19,7 @@ class Category extends Model
         return $query->where('lang', $lang);
     }
 
-    // ✅ Add this method
+    // Add this method
     public function scopeSlug($query, string $slug)
     {
         return $query->where('slug', $slug);

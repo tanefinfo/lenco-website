@@ -25,7 +25,9 @@ import Products from "./pages/admin/Products";
 import Talents from "./pages/admin/Talents";
 import Users from "./pages/admin/Users";
 import Settings from "./pages/admin/Settings";
-import AwardsCrudForm from "./pages/admin/AwardsCrudForm";
+import TalentsAdmin from "./pages/admin/TalentsAdmin";
+import AwardsAdmin from "./pages/admin/AwardsAdmin";
+
 
 
 const queryClient = new QueryClient();
@@ -56,6 +58,10 @@ const App = () => (
                 <Route path="talents" element={<Talents />} />
                 <Route path="users" element={<Users />} />
                 <Route path="settings" element={<Settings />} />
+                <Route path="talents-admin" element={<TalentsAdmin />} />
+                <Route path="awards-admin" element={<AwardsAdmin />} />
+
+
 
               </Route>
 

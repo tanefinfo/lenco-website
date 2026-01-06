@@ -15,147 +15,99 @@ class ContentController extends Controller
     /**
      * Return all content for admin (optionally filtered by lang)
      */
-    public function index(Request $request)
-    {
-        $lang = $request->get('lang', 'en');
+    /**
+ * CREATE work
+ */
+public function storeWork(Request $request)
+{
+    $data = $request->validate([
+        'section' => 'required|in:projects,videos',
+        'lang' => 'required|in:en,am,or',
+        'title' => 'required|string',
+        'description' => 'nullable|string',
+        'type' => 'nullable|in:music-video,movie-trailer',
+        'category_id' => 'nullable|exists:categories,id',
+    ]);
 
-        $categories = Category::lang($lang)->orderBy('sort_order')->get();
-        $projects = Project::lang($lang)->with('category')->orderBy('sort_order')->get();
-        $musicVideos = Video::lang($lang)->type('music-video')->orderBy('sort_order')->get();
-        $movieTrailers = Video::lang($lang)->type('movie-trailer')->orderBy('sort_order')->get();
-        $hero = PageHero::page('works')->lang($lang)->first();
-
-        return response()->json([
-            'hero' => $hero,
-            'categories' => $categories,
-            'projects' => $projects,
-            'videos' => [
-                'musicVideos' => $musicVideos,
-                'movieTrailers' => $movieTrailers
-            ]
+    if ($data['section'] === 'projects') {
+        $item = Project::create([
+            'lang' => $data['lang'],
+            'title' => $data['title'],
+            'description' => $data['description'],
+            'category_id' => $data['category_id'],
+        ]);
+    } else {
+        $item = Video::create([
+            'lang' => $data['lang'],
+            'title' => $data['title'],
+            'description' => $data['description'],
+            'type' => $data['type'],
         ]);
     }
 
-    /**
-     * Store new content (for admin)
-     */
-    public function store(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'section' => 'required|string|in:hero,categories,projects,videos',
-            'lang' => 'required|string|in:en,om,am',
-            'title' => 'nullable|string',
-            'subtitle' => 'nullable|string',
-            'description' => 'nullable|string',
-            'meta' => 'nullable|array',
-            'category_id' => 'nullable|exists:categories,id',
-            'type' => 'nullable|string|in:music-video,movie-trailer',
-            'slug' => 'nullable|string',
+    return response()->json($item, 201);
+}
+public function updateWork(Request $request, $id)
+{
+    $data = $request->validate([
+        'section' => 'required|in:projects,videos',
+        'title' => 'required|string',
+        'description' => 'nullable|string',
+        'type' => 'nullable|in:music-video,movie-trailer',
+        'category_id' => 'nullable|exists:categories,id',
+    ]);
+
+    $model = $data['section'] === 'projects'
+        ? Project::findOrFail($id)
+        : Video::findOrFail($id);
+
+    $model->update($data);
+
+    return response()->json($model);
+}
+public function destroyWork(Request $request, $id)
+{
+    $request->validate([
+        'section' => 'required|in:projects,videos'
+    ]);
+
+    $model = $request->section === 'projects'
+        ? Project::findOrFail($id)
+        : Video::findOrFail($id);
+
+    $model->delete();
+
+    return response()->json(['message' => 'Deleted']);
+}
+
+    public function works(Request $request)
+{
+    $lang = $request->get('lang', 'en');
+
+    $projects = Project::lang($lang)
+        ->with('category')
+        ->get()
+        ->map(fn ($p) => [
+            'id' => $p->id,
+            'title' => $p->title,
+            'type' => 'Project',
+            'status' => 'Published',
+            'date' => $p->created_at->toDateString(),
         ]);
 
-        if ($validator->fails()) {
-            return response()->json(['errors'=>$validator->errors()], 422);
-        }
+    $videos = Video::lang($lang)
+        ->get()
+        ->map(fn ($v) => [
+            'id' => $v->id,
+            'title' => $v->title,
+            'type' => $v->type === 'music-video' ? 'Music Video' : 'Movie Trailer',
+            'status' => 'Published',
+            'date' => $v->created_at->toDateString(),
+        ]);
 
-        $section = $request->section;
+    return response()->json(
+        $projects->merge($videos)->values()
+    );
+}
 
-        switch ($section) {
-            case 'hero':
-                $item = PageHero::create([
-                    'page' => 'works',
-                    'lang' => $request->lang,
-                    'title' => $request->title,
-                    'subtitle' => $request->subtitle
-                ]);
-                break;
-
-            case 'categories':
-                $item = Category::create([
-                    'slug' => $request->slug,
-                    'lang' => $request->lang,
-                    'name' => $request->title,
-                    'sort_order' => $request->sort_order ?? 0
-                ]);
-                break;
-
-            case 'projects':
-                $item = Project::create([
-                    'category_id' => $request->category_id,
-                    'slug' => $request->slug,
-                    'lang' => $request->lang,
-                    'title' => $request->title,
-                    'description' => $request->description,
-                    'thumbnail' => $request->thumbnail,
-                    'sort_order' => $request->sort_order ?? 0
-                ]);
-                break;
-
-            case 'videos':
-                $item = Video::create([
-                    'type' => $request->type,
-                    'slug' => $request->slug,
-                    'lang' => $request->lang,
-                    'title' => $request->title,
-                    'description' => $request->description,
-                    'embed_url' => $request->embed_url,
-                    'sort_order' => $request->sort_order ?? 0
-                ]);
-                break;
-        }
-
-        return response()->json(['message' => 'Created successfully', 'data' => $item]);
-    }
-
-    /**
-     * Show single content item by id
-     */
-    public function show($id)
-    {
-        $models = [Category::class, Project::class, Video::class, PageHero::class];
-
-        foreach ($models as $model) {
-            $item = $model::find($id);
-            if ($item) return response()->json($item);
-        }
-
-        return response()->json(['message' => 'Item not found'], 404);
-    }
-
-    /**
-     * Update content
-     */
-    public function update(Request $request, $id)
-    {
-        $models = [Category::class, Project::class, Video::class, PageHero::class];
-
-        foreach ($models as $model) {
-            $item = $model::find($id);
-            if ($item) {
-                $item->update($request->only([
-                    'title','subtitle','description','meta','slug','sort_order','lang','category_id','thumbnail','embed_url','type'
-                ]));
-                return response()->json(['message'=>'Updated successfully','data'=>$item]);
-            }
-        }
-
-        return response()->json(['message'=>'Item not found'],404);
-    }
-
-    /**
-     * Delete content
-     */
-    public function destroy($id)
-    {
-        $models = [Category::class, Project::class, Video::class, PageHero::class];
-
-        foreach ($models as $model) {
-            $item = $model::find($id);
-            if ($item) {
-                $item->delete();
-                return response()->json(['message'=>'Deleted successfully']);
-            }
-        }
-
-        return response()->json(['message'=>'Item not found'],404);
-    }
 }
