@@ -1,8 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Globe2, Menu, X, Check } from "lucide-react";
+import { Menu, X, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "../../Context/LanguageContext"; // ✅ FIXED PATH
+
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -18,31 +20,24 @@ const navLinks = [
 
 const productsLink = { name: "Products", path: "/products" };
 
-const languages = [
-  { label: "English", value: "en", short: "En", flagSrc: "/img/flags/gb.svg" },
-  { label: "Amharic", value: "am", short: "Am", flagSrc: "/img/flags/et.svg" },
-  {
-    label: "Afan Oromo",
-    value: "ao",
-    short: "Ao",
-    flagSrc: "/img/flags/et.svg",
-  },
-];
-
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
-  const [language, setLanguage] = useState(languages[0]);
-  const dropdownRef = useRef(null);
+  const dropdownRef = useRef<HTMLDivElement | null>(null); // ✅ FIXED
   const location = useLocation();
 
-  // close dropdown on outside click
+  const { language, setLanguage, languages } = useLanguage();
+
   useEffect(() => {
-    const handler = (e) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+    const handler = (e: MouseEvent) => { // ✅ FIXED
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target as Node)
+      ) {
         setLangOpen(false);
       }
     };
+
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
   }, []);
@@ -96,7 +91,7 @@ export function Header() {
               <Link to={productsLink.path}>{productsLink.name}</Link>
             </Button>
 
-            {/* CUSTOM LANGUAGE DROPDOWN */}
+            {/* Language Dropdown */}
             <div
               ref={dropdownRef}
               className="relative ml-4 pl-4 border-l border-border/60"
@@ -107,15 +102,15 @@ export function Header() {
               >
                 <img
                   src={language.flagSrc}
-                  alt={`${language.label} flag`}
+                  alt={language.label}
                   className="h-4 w-6 rounded-sm ring-1 ring-border object-cover"
                 />
-                <span className="text-sm font-semibold">{language.short}</span>
+                <span>{language.short}</span>
                 <span className="text-xs opacity-70">▾</span>
               </button>
 
               {langOpen && (
-                <div className="absolute right-0 mt-2 w-40 rounded-xl border border-border bg-background shadow-lg animate-fade-in overflow-hidden">
+                <div className="absolute right-0 mt-2 w-40 rounded-xl border border-border bg-background shadow-lg overflow-hidden">
                   {languages.map((lang) => (
                     <button
                       key={lang.value}
@@ -124,7 +119,7 @@ export function Header() {
                         setLangOpen(false);
                       }}
                       className={cn(
-                        "flex w-full items-center justify-between px-4 py-2 text-sm font-medium transition-colors",
+                        "flex w-full items-center justify-between px-4 py-2 text-sm",
                         language.value === lang.value
                           ? "bg-primary/10 text-primary"
                           : "hover:bg-muted"
@@ -133,7 +128,7 @@ export function Header() {
                       <span className="flex items-center gap-2">
                         <img
                           src={lang.flagSrc}
-                          alt={`${lang.label} flag`}
+                          alt={lang.label}
                           className="h-4 w-6 rounded-sm ring-1 ring-border object-cover"
                         />
                         {lang.label}
@@ -161,7 +156,7 @@ export function Header() {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden py-4 border-t border-border animate-fade-in">
+          <div className="lg:hidden py-4 border-t border-border">
             <div className="flex flex-col gap-2 px-4">
               {/* Mobile Language */}
               <div className="flex gap-2">
@@ -170,17 +165,17 @@ export function Header() {
                     key={lang.value}
                     onClick={() => setLanguage(lang)}
                     className={cn(
-                      "flex-1 rounded-lg px-4 py-3 text-sm font-semibold transition",
+                      "flex-1 rounded-lg px-4 py-3 text-sm font-semibold",
                       language.value === lang.value
                         ? "bg-primary/15 text-primary"
-                        : "bg-muted hover:bg-muted/70"
+                        : "bg-muted"
                     )}
                   >
                     <span className="flex items-center justify-center gap-2">
                       <img
                         src={lang.flagSrc}
-                        alt={`${lang.label} flag`}
-                        className="h-4 w-6 rounded-sm ring-1 ring-border object-cover"
+                        alt={lang.label}
+                        className="h-4 w-6 rounded-sm"
                       />
                       {lang.short}
                     </span>
@@ -194,10 +189,10 @@ export function Header() {
                   to={link.path}
                   onClick={() => setMobileMenuOpen(false)}
                   className={cn(
-                    "rounded-lg px-4 py-3 text-base font-medium transition",
+                    "rounded-lg px-4 py-3 text-base font-medium",
                     location.pathname === link.path
                       ? "bg-primary/10 text-primary"
-                      : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                      : "text-muted-foreground hover:bg-muted"
                   )}
                 >
                   {link.name}
@@ -214,12 +209,7 @@ export function Header() {
                     : "default"
                 }
               >
-                <Link
-                  to={productsLink.path}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {productsLink.name}
-                </Link>
+                <Link to={productsLink.path}>Products</Link>
               </Button>
             </div>
           </div>

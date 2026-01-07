@@ -20,6 +20,8 @@ import Festivals from "./pages/Festivals";
 import Awards from "./pages/AwardsFrontend";
 import EventDetail from "./pages/EventDetail";
 import AwardsFrontend from "./pages/AwardsFrontend";
+import { LanguageProvider } from "./Context/LanguageContext";
+
 
 const queryClient = new QueryClient();
 
@@ -28,7 +30,8 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
+      {/* <BrowserRouter> */}
+        {/* <LanguageProvider> */}
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -46,7 +49,8 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </BrowserRouter>
+        {/* </LanguageProvider> */}
+      {/* </BrowserRouter> */}
     </TooltipProvider>
   </QueryClientProvider>
 );

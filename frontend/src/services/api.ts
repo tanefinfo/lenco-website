@@ -23,6 +23,12 @@ import servicesData from "@/data/services.json";
 import videosData from "@/data/videos.json";
 import profileData from "@/data/profile.json";
 import testimonialsData from "@/data/testimonials.json";
+import api from "@/lib/api";
+import type { Gallery } from "@/types/content";
+
+import { useQuery } from "@tanstack/react-query";
+// import { api } from "@/lib/api";
+// import type { Gallery } from "@/types/content";
 
 export async function getProjects(): Promise<Project[]> {
   return projectsData.projects as Project[];
@@ -106,9 +112,84 @@ import galleriesData from "@/data/galleries.json";
 import festivalsData from "@/data/festivals.json";
 import awardsData from "@/data/awards.json";
 
-export async function getGalleries(): Promise<Gallery[]> {
-  return galleriesData.galleries as Gallery[];
+
+
+
+
+
+
+
+
+
+export async function getGalleries(lang: string): Promise<Gallery[]> {
+  const res = await api.get(`/galleries?lang=${lang}`);
+  return res.data.map((item: any) => ({
+    id: item.id,
+    title: item.title,
+    description: item.description ?? "",
+    category: normalizeCategory(item.category, lang),
+    cover: item.cover,
+    images: normalizeImages(item.images),
+  }));
 }
+
+export function useGalleries(lang: string) {
+  return useQuery(["galleries", lang], () => getGalleries(lang), {
+    staleTime: 1000 * 60, // optional: 1 minute
+  });
+}
+
+
+const API_URL = import.meta.env.VITE_API_URL;
+const STORAGE_URL = `${API_URL}/storage`;
+
+
+
+function normalizeImages(images: any[]): string[] {
+  if (!images || images.length === 0) return [];
+
+  // already correct
+  if (typeof images[0] === "string" && !images[0].includes("[")) {
+    return images;
+  }
+
+  try {
+    const raw = images[0].replace(`${STORAGE_URL}/`, "");
+
+    const parsed = JSON.parse(raw);
+
+    return parsed.map(
+      (img: string) => `${STORAGE_URL}/${img}`
+    );
+  } catch {
+    return [];
+  }
+}
+
+
+// function normalizeCategory(category: string): string {
+//   const map: Record<string, string> = {
+//     portraits: "Portraits",
+//     bts: "Behind the Scenes",
+//     onset: "On Set",
+//     events: "Events",
+//   };
+
+const categoryMap: Record<string, Record<string, string>> = {
+  portraits: { en: "Portraits", am: "ስዕሎች", ao: "Fayyadama" },
+  bts: { en: "Behind the Scenes", am: "የፊልም ከፊል", ao: "Dabaree Keessa" },
+  onset: { en: "On Set", am: "በሴት ላይ", ao: "Maqaa" },
+  events: { en: "Events", am: "ክስተቶች", ao: "Dhufaa" },
+};
+
+  function normalizeCategory(category: string, lang: string): string {
+  return categoryMap[category?.toLowerCase()]?.[lang] ?? category;
+}
+
+
+
+
+
 
 export async function getFestivals(): Promise<Festival[]> {
   return festivalsData.festivals as Festival[];

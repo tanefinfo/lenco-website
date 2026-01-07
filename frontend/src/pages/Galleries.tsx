@@ -12,19 +12,33 @@ import { cn } from "@/lib/utils";
 import { useGalleries } from "@/hooks/useContent";
 import type { Gallery, GalleryCategory } from "@/types/content";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { useLanguage } from "../Context/LanguageContext";
 
-const categories: GalleryCategory[] = [
-  "Portraits",
-  "Behind the Scenes",
-  "On Set",
-  "Events",
-];
+
+
+
+  
+
 
 export default function Galleries() {
+  const { lang } = useLanguage(); // get current language
+
+  const categoriesMap: Record<string, Record<string, string>> = {
+  portraits: { en: "Portraits", am: "ስዕሎች", ao: "Fayyadama" },
+  bts: { en: "Behind the Scenes", am: "የፊልም ከፊል", ao: "Dabaree Keessa" },
+  onset: { en: "On Set", am: "በሴት ላይ", ao: "Maqaa" },
+  events: { en: "Events", am: "ክስተቶች", ao: "Dhufaa" },
+};
+
+const categories = Object.keys(categoriesMap).map(
+  (key) => categoriesMap[key][lang]
+);
+
   const [activeCategory, setActiveCategory] = useState<GalleryCategory | "All">(
     "All"
   );
-  const { data: galleries = [], isLoading, error } = useGalleries();
+  const { data: galleries = [], isLoading, error } = useGalleries(lang); // pass lang
+
   const [open, setOpen] = useState(false);
   const [current, setCurrent] = useState<Gallery | null>(null);
   const [idx, setIdx] = useState(0);
@@ -48,7 +62,6 @@ export default function Galleries() {
       (prev) => (prev - 1 + current.images.length) % current.images.length
     );
   };
-
   return (
     <Layout>
       <HeroSection

@@ -9,21 +9,28 @@ use Illuminate\Support\Facades\Storage;
 
 class GalleryController extends Controller
 {
-    public function index(Request $request)
-    {
-        $lang = $request->query('lang', 'en');
+public function index(Request $request)
+{
+    $langMap = [
+        'en' => 'en',
+        'am' => 'am',
+        'ao' => 'or',
+    ];
 
-        return Gallery::all()->map(function ($g) use ($lang) {
-            return [
-                'id' => $g->id,
-                'category' => $g->category,
-                'title' => $g["title_$lang"],
-                'description' => $g["description_$lang"],
-                'cover' => $g->cover,
-                'images' => $g->images ?? [],
-            ];
-        });
-    }
+    $lang = $langMap[$request->query('lang', 'en')] ?? 'en';
+
+    return Gallery::all()->map(function ($g) use ($lang) {
+        return [
+            'id' => $g->id,
+            'category' => $g->category,
+            'title' => $g->{"title_$lang"},
+            'description' => $g->{"description_$lang"},
+            'cover' => $g->cover,
+            'images' => $g->images ?? [],
+        ];
+    });
+}
+
 
     public function store(Request $request)
     {
@@ -55,20 +62,28 @@ class GalleryController extends Controller
         return Gallery::create($data);
     }
 
-    public function show($id, Request $request)
-    {
-        $lang = $request->query('lang', 'en');
-        $g = Gallery::findOrFail($id);
+public function show($id, Request $request)
+{
+    $langMap = [
+        'en' => 'en',
+        'am' => 'am',
+        'ao' => 'or',
+    ];
 
-        return [
-            'id' => $g->id,
-            'category' => $g->category,
-            'title' => $g["title_$lang"],
-            'description' => $g["description_$lang"],
-            'cover' => $g->cover,
-            'images' => $g->images ?? [],
-        ];
-    }
+    $lang = $langMap[$request->query('lang', 'en')] ?? 'en';
+
+    $g = Gallery::findOrFail($id);
+
+    return [
+        'id' => $g->id,
+        'category' => $g->category,
+        'title' => $g->{"title_$lang"},
+        'description' => $g->{"description_$lang"},
+        'cover' => $g->cover,
+        'images' => $g->images ?? [],
+    ];
+}
+
 
     public function update(Request $request, $id)
     {

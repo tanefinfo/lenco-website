@@ -181,41 +181,48 @@ const Galleries: React.FC = () => {
     });
   };
 
-  /** ================= COLUMNS ================= */
-  const columns = [
-    {
-      key: 'cover' as keyof GalleryRow,
-      header: 'Cover',
-      render: (row: GalleryRow) => (
-        <img
-          src={row.cover}
-          alt={row.title}
-          className="h-12 w-12 rounded object-cover border"
-        />
-      ),
-    },
-    { key: 'title' as keyof GalleryRow, header: t.title },
-    { key: 'category' as keyof GalleryRow, header: 'Category' },
-    {
-      key: 'images' as keyof GalleryRow,
-      header: 'Gallery',
-      render: (row: GalleryRow) => (
-        <div className="flex items-center gap-2">
-          {row.images?.slice(0, 3).map((img, i) => (
-            <img
-              key={i}
-              src={img}
-              alt=""
-              className="h-8 w-8 rounded object-cover border"
-            />
-          ))}
-          {row.images.length > 3 && (
-            <Badge variant="secondary">+{row.images.length - 3}</Badge>
-          )}
-        </div>
-      ),
-    },
-  ];
+  /* ================= COLUMNS ================= */
+ const columns = [
+  {
+    key: 'cover' as keyof GalleryRow,
+    header: 'Cover',
+    render: (row: GalleryRow) => (
+      <img
+        src={row.cover}
+        alt={row.title}
+        className="h-12 w-12 rounded object-cover border"
+      />
+    ),
+  },
+  { key: 'title' as keyof GalleryRow, header: t.title },
+  { key: 'category' as keyof GalleryRow, header: 'Category' },
+  {
+    key: 'images' as keyof GalleryRow,
+    header: 'Gallery',
+    render: (row: GalleryRow) => (
+      <div className="flex items-center gap-2">
+        {row.images?.slice(0, 3).map((img, i) => (
+          <img
+            key={i}
+            src={img}
+            alt=""
+            className="h-8 w-8 rounded object-cover border"
+          />
+        ))}
+        {row.images.length > 3 && (
+          <Badge variant="secondary">+{row.images.length - 3}</Badge>
+        )}
+      </div>
+    ),
+  },
+];
+const CATEGORY_MAP: Record<string, string> = {
+  portraits: "Portraits",
+  bts: "Behind the Scenes",
+  onset: "On Set",
+  events: "Events",
+};
+
 
   return (
     <div className="space-y-6">
@@ -239,15 +246,27 @@ const Galleries: React.FC = () => {
           <DialogHeader>
             <DialogTitle>{editingId ? 'Edit Gallery' : 'Add Gallery'}</DialogTitle>
           </DialogHeader>
+        <div>
+  <Label>Category</Label>
+  <select
+    className="w-full border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-black"
+    value={form.category}
+    onChange={(e) =>
+      setForm({ ...form, category: e.target.value })
+    }
+  >
+    <option value="" disabled>
+      Select category
+    </option>
 
-          <div className="space-y-4">
-            <div>
-              <Label>Category</Label>
-              <Input
-                value={form.category}
-                onChange={(e) => setForm({ ...form, category: e.target.value })}
-              />
-            </div>
+    {Object.entries(CATEGORY_MAP).map(([key, label]) => (
+      <option key={key} value={key}>
+        {label}
+      </option>
+    ))}
+  </select>
+          
+
 
             <div>
               <Label>Cover Image</Label>
