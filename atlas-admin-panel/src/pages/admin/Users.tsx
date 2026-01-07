@@ -17,14 +17,18 @@ interface User {
   email: string;
   role: string;
   status?: string;
-  lastActive?: string;
+}
+
+interface Role {
+  id: number;
+  name: string;
 }
 
 const Users: React.FC = () => {
   const { t } = useLanguage();
   const [users, setUsers] = useState<User[]>([]);
+  const [roles, setRoles] = useState<Role[]>([]);
   const [loading, setLoading] = useState(false);
-
   const [modalOpen, setModalOpen] = useState(false);
   const [submitLoading, setSubmitLoading] = useState(false);
   const [editingUser, setEditingUser] = useState<User | null>(null);
@@ -36,22 +40,38 @@ const Users: React.FC = () => {
     role: '',
   });
 
-  /* ---------------- FETCH ---------------- */
+  /* ---------------- FETCH USERS ---------------- */
   const fetchUsers = async () => {
     setLoading(true);
     try {
       const res = await api.get('/users');
       setUsers(res.data.data || res.data); // handle pagination
-    } catch (err) {
+    } catch {
       Swal.fire('Error', 'Failed to fetch users', 'error');
     } finally {
       setLoading(false);
     }
   };
 
+  /* ---------------- FETCH ROLES ---------------- */
+  const fetchRoles = async () => {
+    try {
+      const res = await api.get('/roles');
+      setRoles(res.data);
+    } catch {
+      Swal.fire('Error', 'Failed to load roles', 'error');
+    }
+  };
+
   useEffect(() => {
     fetchUsers();
   }, []);
+
+  useEffect(() => {
+    if (modalOpen) {
+      fetchRoles();
+    }
+  }, [modalOpen]);
 
   /* ---------------- FORM ---------------- */
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -60,7 +80,12 @@ const Users: React.FC = () => {
 
   const openModalForEdit = (user: User) => {
     setEditingUser(user);
-    setForm({ name: user.name, email: user.email, password: '', role: user.role });
+    setForm({
+      name: user.name,
+      email: user.email,
+      password: '',
+      role: user.role, // must match DB role.name
+    });
     setModalOpen(true);
   };
 
@@ -70,91 +95,83 @@ const Users: React.FC = () => {
   };
 
   /* ---------------- SUBMIT ---------------- */
-const handleSubmit = async () => {
-  // Basic validation
-  if (!form.name || !form.email || !form.role || (!editingUser && !form.password)) {
-    Swal.fire({
-      icon: 'warning',
-      title: 'Validation Error',
-      html: `<strong>All fields are required!</strong><br/>
-             Please make sure you fill out <u>Name, Email, Role${!editingUser ? ', and Password' : ''}</u>.`,
-      showCloseButton: true,
-      confirmButtonText: 'Got it!',
-    });
-    return;
-  }
-
-  setSubmitLoading(true);
-
-  try {
-    if (editingUser) {
-      // Update user
-      await api.put(`/users/${editingUser.id}`, form);
-
+  const handleSubmit = async () => {
+    if (!form.name || !form.email || !form.role || (!editingUser && !form.password)) {
       Swal.fire({
-        icon: 'success',
-        title: 'User Updated',
-        html: `<strong>${form.name}</strong> has been updated successfully.`,
-        showCloseButton: true,
-        showCancelButton: true,
-        confirmButtonText: 'View Profile',
-        cancelButtonText: 'Close',
-      }).then((result) => {
-        if (result.isConfirmed) {
-          // You can redirect to profile page if needed
-          window.location.href = `/users/${editingUser.id}`;
-        }
-      });
-
-    } else {
-      // Create user
-      const response = await api.post('/users', form);
-
-      Swal.fire({
-        icon: 'success',
-        title: 'User Added',
-        html: `<strong>${form.name}</strong> was created successfully!`,
-        showCloseButton: true,
-        showCancelButton: true,
-        confirmButtonText: 'View Users',
-        cancelButtonText: 'Close',
-      }).then((result) => {
-        if (result.isConfirmed) {
-          // Redirect to users list
-          window.location.href = '/users';
-        }
-      });
-    }
-
-    setModalOpen(false);
-    resetForm();
-    fetchUsers();
-
-  } catch (err: any) {
-    if (err.response?.data?.errors) {
-      Swal.fire({
-        icon: 'error',
+        icon: 'warning',
         title: 'Validation Error',
-        html: Object.entries(err.response.data.errors)
-          .map(([field, messages]: any) =>
-            `<strong>${field}:</strong> ${messages.join(', ')}`).join('<br/>'),
+        html: `<strong>All fields are required!</strong><br/>
+               Please make sure you fill out <u>Name, Email, Role${!editingUser ? ', and Password' : ''}</u>.`,
         showCloseButton: true,
-        confirmButtonText: 'Fix Errors',
+        confirmButtonText: 'Got it!',
       });
-    } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Operation Failed',
-        text: 'Something went wrong. Please try again later.',
-        showCloseButton: true,
-        confirmButtonText: 'Retry',
-      });
+      return;
     }
-  } finally {
-    setSubmitLoading(false);
-  }
-};
 
+    setSubmitLoading(true);
+
+    try {
+      if (editingUser) {
+        // Update user
+        await api.put(`/users/${editingUser.id}`, form);
+
+        Swal.fire({
+          icon: 'success',
+          title: 'User Updated',
+          html: `<strong>${form.name}</strong> has been updated successfully.`,
+          showCloseButton: true,
+          showCancelButton: true,
+          confirmButtonText: 'View Profile',
+          cancelButtonText: 'Close',
+        }).then((result) => {
+          if (result.isConfirmed) window.location.href = `/users/${editingUser.id}`;
+        });
+
+      } else {
+        // Create user
+        await api.post('/users', form);
+
+        Swal.fire({
+          icon: 'success',
+          title: 'User Added',
+          html: `<strong>${form.name}</strong> was created successfully!`,
+          showCloseButton: true,
+          showCancelButton: true,
+          confirmButtonText: 'View Users',
+          cancelButtonText: 'Close',
+        }).then((result) => {
+          if (result.isConfirmed) window.location.href = '/users';
+        });
+      }
+
+      setModalOpen(false);
+      resetForm();
+      fetchUsers();
+
+    } catch (err: any) {
+      if (err.response?.data?.errors) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Validation Error',
+          html: Object.entries(err.response.data.errors)
+            .map(([field, messages]: any) =>
+              `<strong>${field}:</strong> ${messages.join(', ')}`).join('<br/>'),
+          showCloseButton: true,
+          confirmButtonText: 'Fix Errors',
+        });
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Operation Failed',
+          text: 'Something went wrong. Please try again later.',
+          showCloseButton: true,
+          confirmButtonText: 'Retry',
+        });
+      }
+    } finally {
+      setSubmitLoading(false);
+    }
+  };
 
   /* ---------------- DELETE ---------------- */
   const handleDelete = async (user: User) => {
@@ -164,7 +181,6 @@ const handleSubmit = async () => {
       icon: 'warning',
       showCancelButton: true,
     });
-
     if (!confirm.isConfirmed) return;
 
     try {
@@ -177,7 +193,8 @@ const handleSubmit = async () => {
   };
 
   /* ---------------- TABLE ---------------- */
-  const getInitials = (name: string) => name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+  const getInitials = (name: string) =>
+    name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
 
   const columns = [
     {
@@ -236,11 +253,19 @@ const handleSubmit = async () => {
             <Input name="name" placeholder="Name" value={form.name} onChange={handleChange} />
             <Input name="email" placeholder="Email" value={form.email} onChange={handleChange} />
             {!editingUser && <Input name="password" type="password" placeholder="Password" value={form.password} onChange={handleChange} />}
-            <select name="role" value={form.role} onChange={handleChange} className="w-full border rounded px-2 py-1">
+
+            <select
+              name="role"
+              value={form.role}
+              onChange={handleChange}
+              className="w-full border rounded px-2 py-1"
+            >
               <option value="">Select Role</option>
-              <option value="Super Admin">Super Admin</option>
-              <option value="Editor">Editor</option>
-              <option value="Viewer">Viewer</option>
+              {roles.map(role => (
+                <option key={role.id} value={role.name}>
+                  {role.name.replace('-', ' ').toUpperCase()}
+                </option>
+              ))}
             </select>
 
             <Button onClick={handleSubmit} disabled={submitLoading}>

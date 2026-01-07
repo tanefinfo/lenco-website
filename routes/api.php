@@ -49,7 +49,7 @@ Route::get('/users', [UserController::class, 'index']);
 Route::post('/users', [UserController::class, 'store']);
 Route::put('/users/{user}', [UserController::class, 'update']);
 Route::delete('/users/{user}', [UserController::class, 'destroy']);
-
+Route::get('/roles', [UserController::class, 'roles']);
 Route::prefix('about')->group(function () {
     // READ: Get content by language, e.g., /api/about?lang=en
     Route::get('/', [AboutContentController::class, 'show']);
@@ -151,3 +151,8 @@ Route::delete('/talent-applications/{id}', [TalentApplicationController::class, 
 Route::post('/admin/works', [ContentController::class, 'storeWork']);
 Route::put('/admin/works/{id}', [ContentController::class, 'updateWork']);
 Route::delete('/admin/works/{id}', [ContentController::class, 'destroyWork']);
+// routes/api.php
+Route::get('/admin/categories', function (Request $request) {
+    $lang = $request->get('lang', 'en');
+    return \App\Models\Category::lang($lang)->get();
+});
